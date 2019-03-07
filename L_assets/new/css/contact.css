@@ -1,0 +1,106 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 Dec 2018, 12:31:32 PM
+    Author     : Holang
+*/
+
+
+body{
+    background-color: white;
+}
+
+.top-row{
+   
+}
+
+.logo #logo{
+    width: 80%;
+}
+
+.top-row .one{
+    margin-top: 25%;
+    border: 2px solid #269abc;
+    color: #269abc;
+}
+
+.top-row .two{
+    margin-left: 10%;
+    margin-top: 25%;
+    font-size: 13px;
+    color: black;
+}
+
+
+.top-row .login{
+    margin-top: 3%;
+}
+
+.login .username{
+    width: 150%;
+    height: 25px;
+    font-size: 12px;
+    text-align: right;
+    margin-left: -20%;
+    border: none;
+    border-bottom: 2px solid;
+    border-color: gray;
+}
+
+.login .password{
+    width: 150%;
+    height: 25px;
+    font-size: 12px;
+    text-align: right;
+    margin-left: 0%;
+    border: none;
+     border-bottom: 2px solid;
+    border-color: gray;
+}
+
+.login .sub{
+    width: 85%;
+    height: 25px;
+    background-color: green;
+    color: white;
+     margin-left: 20%;
+     border: 1px solid;
+     border-color: green;
+     border-radius: 7px;
+     font-size: 12px;
+}
+
+
+.middle-row{
+    background-color: rgba(250,251,252,1.0);
+/*    height: -webkit-fill-available;*/
+     height: 500px;
+}
+
+h1{
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+p{
+    margin-left: 10%;
+}
+
+.bottom-row{
+    background-color: rgba(58,58,58,1.0);
+}
+
+.logo #logo1{
+    width: 80%;
+}
+
+.login .logout{
+    color: white;
+    background-color: blue;
+    width: 35%;
+    font-size: 12px;
+    
+}

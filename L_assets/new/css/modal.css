@@ -1,0 +1,341 @@
+    
+/*//----------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//*/
+
+#modalOne{
+    visibility: visible;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(58,58,58,1.0); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 1.0s;
+    animation-name: fadeIn;
+    animation-duration: 1.0s
+}
+
+    /* Modal Content */
+    .menu-modal-content1{
+        
+        visibility: visible;
+        position: fixed;
+        bottom: 0;
+        z-index: 3; /* Sit on top */
+/*        background:rgba(255,255,255, 0.8);*/
+        background-color: #f2f3f3;  
+        height: 60%;
+        width: 18%;
+        padding-top: 0px;
+        margin-left: 40%;
+        margin-bottom: 15%;
+        -webkit-animation-name: slideIn;
+        -webkit-animation-duration: 1.0s;
+        animation-name: slideIn;
+        animation-duration: 1.0s
+    }
+
+    /* The Close Button */
+    .menu-modal-body1 .close11 img {
+        height: 15px;
+        margin-left: 0;
+        margin-top: 0px;
+        position: absolute;
+    }
+
+    
+
+    .menu-modal-body1 {
+        padding: 0px 0px;
+
+        display: inline-block;
+    }
+
+
+
+/*     Add Animation */
+    @-webkit-keyframes slideIn {
+        from {bottom: -300px; opacity: 0} 
+        to {bottom: 0; opacity: 1}
+    }
+
+    @keyframes slideIn {
+        from {bottom: -300px; opacity: 0}
+        to {bottom: 0; opacity: 1}
+    }
+
+    @-webkit-keyframes fadeIn {
+        from {opacity: 0} 
+        to {opacity: 1}
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0} 
+        to {opacity: 1}
+    }
+    
+/*=====================================================================================*/
+/*=====================================================================================*/
+
+.menu-modal-content1 .name{
+    margin-bottom: 5%;
+    background-color: rgba(212,215,224,1.0);
+    color: black;
+    font-size: 10px;
+}
+
+.menu-modal-content1 .phone{
+    margin-bottom: 5%;
+    background-color: rgba(212,215,224,1.0);
+    color: black;
+    font-size: 10px;
+}
+
+.menu-modal-content1 .email{
+    margin-bottom: 5%;
+    background-color: rgba(212,215,224,1.0);
+    color: black;
+    font-size: 10px;
+}
+
+.menu-modal-content1 .password{
+    margin-bottom: 5%;
+    background-color: rgba(212,215,224,1.0);
+    color: black;
+    font-size: 10px;
+}
+
+.menu-modal-content1 .confirm{
+    margin-bottom: 5%;
+    background-color: rgba(212,215,224,1.0);
+    color: black;
+    font-size: 10px;
+}
+
+.menu-modal-content1 form{
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.menu-modal-content1 .sub{
+    background-color: rgba(64,64,244,1.0);
+    height: 30px;
+    width: 100px;
+    color: white;
+    border-radius: 5px;
+    border-color: rgba(64,64,244,1);
+    margin-top: 10%;
+    margin-left: 15%;
+}
+
+
+.menu-modal-content1 form .parent-ref{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 180px;
+    height: 75px;
+    text-align: center;
+    margin-left: 0px;
+}
+
+.menu-modal-content1 form .ref{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+    height: 35px;
+    margin-left: 5px;
+    margin-top: 10px;
+    
+}
+
+.menu-modal-content1 form .parent-tags{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 220px;
+    height: 75px;
+    text-align: center;
+    margin-left: 300px;
+    margin-top: 115px;
+}
+
+.menu-modal-content1 form .tags{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    height: 35px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.menu-modal-content1 form .parent-law_report{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 220px;
+    height: 75px;
+    text-align: center;
+    margin-left: 410px
+}
+
+.menu-modal-content1 form .law_report{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    height: 35px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.menu-modal-content1 form .parent-description{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 220px;
+    height: 75px;
+    text-align: center;
+    margin-left: 635px
+}
+
+.menu-modal-content1 form .description{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    height: 35px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.menu-modal-content1 form .parent-court{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 220px;
+    height: 75px;
+    text-align: center;
+    margin-left: 0px;
+    margin-top: 115px;
+}
+
+.menu-modal-content1 form .court{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    height: 35px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.menu-modal-content1 form .parent-case{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 180px;
+    height: 75px;
+    text-align: center;
+    margin-left: 470px;
+    margin-top: 115px;
+}
+
+.menu-modal-content1 form .case_number{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+    height: 35px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.menu-modal-content1 form .parent-date{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 220px;
+    height: 75px;
+    text-align: center;
+    margin-left: 235px;
+    margin-top: 115px;
+}
+
+.menu-modal-content1 form .date_delivered{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    height: 35px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.menu-modal-content1 form .parent-judge{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 445px;
+    height: 75px;
+    text-align: center;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+.menu-modal-content1 form .name_of_judge{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 425px;
+    height: 35px;
+    margin-left: 0px;
+    margin-top: 10px;
+}
+
+.menu-modal-content1 form .parent-upload{
+    position: absolute;
+    z-index: 1;
+    background-color: #E5E9F0;
+    width: 445px;
+    height: 75px;
+    text-align: center;
+    margin-left: 0px;
+    margin-top: 150px;
+}
+
+.menu-modal-content1 form #upload_document{
+/*    border: 2px solid #2abddb;*/
+    box-shadow: 1px 1px 15px #003A6E;
+    border-radius: 5px;
+    text-align: center;
+    width: 425px;
+    height: 35px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.menu-modal-content1 form .submit{
+    margin-top: 360px;
+    margin-left: 360px;
+    border: 2px solid #2abddb;
+    border-radius: 25px; 
+    text-align: center;
+    cursor: pointer;
+}

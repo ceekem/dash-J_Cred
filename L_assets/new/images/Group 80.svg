@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 22 29">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #f7f7f7;
+      }
+
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2, .cls-3, .cls-5 {
+        fill: none;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-linecap: round;
+      }
+
+      .cls-2 {
+        stroke-linejoin: round;
+      }
+
+      .cls-4 {
+        stroke: none;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-1.149" y1="-0.329" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="blue"/>
+      <stop offset="1" stop-color="#b40000"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_80" data-name="Group 80" transform="translate(-224 -710)">
+    <g id="Rectangle_22" data-name="Rectangle 22" class="cls-1" transform="translate(224 710)">
+      <rect class="cls-4" width="22" height="29" rx="2"/>
+      <rect class="cls-5" x="0.5" y="0.5" width="21" height="28" rx="1.5"/>
+    </g>
+    <path id="Path_48" data-name="Path 48" class="cls-2" d="M229.191,722.459,232.23,727l8.423-6.713" transform="matrix(0.995, -0.105, 0.105, 0.995, -73.354, 24.52)"/>
+    <line id="Line_7" data-name="Line 7" class="cls-3" x2="15" transform="translate(227.5 727.5)"/>
+    <line id="Line_8" data-name="Line 8" class="cls-3" x2="15" transform="translate(227.5 730.5)"/>
+    <line id="Line_9" data-name="Line 9" class="cls-3" x2="15" transform="translate(227.5 733.5)"/>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="88px" viewBox="0 0 64 88" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 7@1x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M22.9253731,0 L62,0 C63.1045695,3.72131305e-15 64,0.8954305 64,2 L64,86 C64,87.1045695 63.1045695,88 62,88 L2,88 C0.8954305,88 1.3527075e-16,87.1045695 0,86 L0,24.8695652 L22.9253731,0 Z" id="path-1"></path>
+        <linearGradient x1="11.014862%" y1="-48.4494585%" x2="100%" y2="166.106143%" id="linearGradient-2">
+            <stop stop-color="#E77226" stop-opacity="0.965806159" offset="0%"></stop>
+            <stop stop-color="#4CCA11" stop-opacity="0.965806159" offset="100%"></stop>
+        </linearGradient>
+        <path d="M2,28 L24.08,28 C25.1403867,28 26,27.1377336 26,26.0740741 L26,2" id="path-3"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tablet-Copy-14" transform="translate(-532.000000, -265.000000)">
+            <g id="Group-7" transform="translate(532.000000, 265.000000)">
+                <g id="Rectangle-2">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <path stroke="#19CDC1" stroke-width="4.2" d="M23.8456656,2.1 L2.1,25.6898122 L2.1,85.9 L61.9,85.9 L61.9,2.1 L23.8456656,2.1 Z"></path>
+                </g>
+                <path d="M11.5,57 L53.5,57 C54.8807119,57 56,58.1192881 56,59.5 C56,60.8807119 54.8807119,62 53.5,62 L11.5,62 C10.1192881,62 9,60.8807119 9,59.5 C9,58.1192881 10.1192881,57 11.5,57 Z M11.5,67 L53.5,67 C54.8807119,67 56,68.1192881 56,69.5 C56,70.8807119 54.8807119,72 53.5,72 L11.5,72 C10.1192881,72 9,70.8807119 9,69.5 C9,68.1192881 10.1192881,67 11.5,67 Z M11.5,48 L53.5,48 C54.8807119,48 56,49.1192881 56,50.5 C56,51.8807119 54.8807119,53 53.5,53 L11.5,53 C10.1192881,53 9,51.8807119 9,50.5 C9,49.1192881 10.1192881,48 11.5,48 Z" id="Combined-Shape" fill="url(#linearGradient-2)"></path>
+                <g id="Rectangle-2-Copy">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    <path stroke="#19CDC1" stroke-width="4.2" d="M6.79636866,25.9 L23.9,25.9 L23.9,7.37106605 L6.79636866,25.9 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

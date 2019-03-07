@@ -1,0 +1,244 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 Dec 2018, 12:31:32 PM
+    Author     : Holang
+*/
+
+
+body{
+    background-color: white;
+}
+
+.top-row{
+   
+}
+
+.logo #logo{
+    width: 80%;
+}
+
+.top-row .one{
+    margin-top: 25%;
+    border: 2px solid #269abc;
+    color: #269abc;
+}
+
+.top-row .two{
+    margin-left: 10%;
+    margin-top: 25%;
+    font-size: 13px;
+    color: black;
+}
+
+
+.top-row .login{
+    margin-top: 3%;
+}
+
+.login .username{
+    width: 150%;
+    height: 25px;
+    font-size: 12px;
+    text-align: right;
+    margin-left: -20%;
+    border-bottom: 2px solid;
+    border-color: gray;
+}
+
+.login .password{
+    width: 150%;
+    height: 25px;
+    font-size: 12px;
+    text-align: right;
+    margin-left: 0%;
+     border-bottom: 2px solid;
+    border-color: gray;
+}
+
+.login .sub{
+    width: 85%;
+    height: 25px;
+    background-color: green;
+    color: white;
+     margin-left: 20%;
+     border: 1px solid;
+     border-color: green;
+     border-radius: 7px;
+     font-size: 12px;
+}
+
+
+.middle-row{
+    background-image: url("../images/backlit-bonding-casual-708392 (1).jpg");
+    background-repeat: round;
+    width: 100%;
+    height: 600px;
+}
+
+.middle-row .first{
+    background-color: rgba(250,251,252,1.0);
+    width: 25%;
+    height: 80%;
+    margin-top: 5%;
+    margin-left: 9%;
+    padding-top: 5%;
+    font-size: 10px;
+}
+
+.middle-row  .second{
+    
+    width: 55%;
+    height: 80%;
+    margin-top:5%;
+    margin-left: 5%;
+        
+}
+
+.first .how-to{
+    font-size: 15px;
+    padding-left: 30%;
+}
+
+.middle-row .first p{
+    text-align: justify;
+    margin-top: 25%;
+    color: #7BA2E5;
+    padding-left: 10%;
+    font-size: 13px;
+}
+
+.middle-row .first h1{
+    color: #D8E6FF;
+    font-size: 13px;
+    text-align: center;
+}
+
+.middle-row .first #icon{
+    width: 8%;
+    margin-left: 25%;
+}
+
+.middle-row  .second .one{
+    background-color: #ffffff;
+    height: 100%;
+   
+}
+
+.middle-row  .second .two{
+    background-color: #2bb7cc;
+    height: 100%;
+    opacity: 0.9;
+}
+
+.middle-row  .second .three{
+    background-color: #efefef;
+    height: 100%;
+}
+
+
+#myRange{
+    transform: rotate(270deg);
+    margin-left: -35%;
+}
+
+#amount{
+    position: relative;
+    margin-left: 130%;
+    margin-top: -38%;
+    z-index: 1;
+    color: white;
+    font-size: 30px;
+}
+
+#myRange1{
+    transform: rotate(270deg);
+    margin-left: 25%;
+    margin-top: 15%;
+}
+
+#period{
+    position: relative;
+    margin-left: 130%;
+    margin-top: 15%;
+    opacity: 1;
+    z-index: 1;
+    color: white;
+    font-size: 30px;
+}
+
+#money{
+    margin-top: 8%;
+    width: 35%;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+#length{
+    margin-left: 55%;
+    margin-top: -18%;
+    width: 35%;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+#loan-amount{
+    margin-top: 80%;
+    color: white;    
+}
+
+#loan-period{
+    margin-top: 75%;
+    color: white;
+}
+
+#totalp{
+    margin-top: 150%;
+    color: #4040F4;
+    font-size: 16px;
+}
+
+#interestp{
+    margin-top: 90%;
+    margin-bottom: 0%;
+    font-size: 16px;
+    color: gray;
+}
+
+p1{
+    font-size: 9px;
+}
+
+.middle-row .second .threeBtn{
+    color: white;
+    background-color: #F4B200;
+    width: 120%;
+    font-size: 12px;
+    margin-left: -10%;
+    margin-top: 120%;
+}
+
+.login .logout{
+    color: white;
+    background-color: blue;
+    width: 35%;
+    font-size: 12px;
+    
+}
+
+
+.middle-row .first .one{
+    
+    margin-top: 5%;
+    margin-left: 20%;
+}
+
+.middle-row .first #active{
+    background-color: rgba(207,216,242,1.0);
+}
+

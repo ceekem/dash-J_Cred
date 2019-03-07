@@ -1,0 +1,45 @@
+.logo_i{
+    width: 180px;
+    height: 83px;
+}
+
+
+.logo:after{
+    content: ""; /* This is necessary for the pseudo element to work. */ 
+    display: block; /* This will put the pseudo element on its own line. */
+    margin: 0 auto; /* This will center the border. */
+    width: 80%; /* Change this to whatever width you want. */
+    padding: 10px 15px;  /*This creates some space between the element and the border. */ 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);; /* This creates the border. Replace black with whatever color you want. */
+}
+
+.row-c{
+    cursor: pointer;
+}
+
+.sch{
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+}
+
+.schtxt{
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: 2px solid;
+    margin-left: 5px;
+}
+
+.schlab{
+    font-size: 15px;
+}
+
+.f-group{
+    width: 50%;
+}
+
+.i-center{
+    display: flex;
+    justify-content: center;
+}
