@@ -109,11 +109,48 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             foreach($errors as $error){
                                 echo '<script> alert("'.$error.'");</script>'; 
                             }
-                             die();
+                            //  die();
                         }
 
                     }
 
+
+
+
+                    if(isset($_FILES['avatar'])){
+                        $errors = array();
+                        // $maxsize = '10M';
+                        $maxsize = 1097252;
+                        $acceptable = array(
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                            'image/png'
+                        );
+
+                        if(($_FILES['avatar']['size'] >= $maxsize) || ($_FILES['avatar']['size'] == 0)){
+                            $errors[] = 'File too large. File must be less than 10 megabytes.';
+                        }
+
+                        if((!in_array($_FILES['avatar']['type'], $acceptable)) && (!empty($_FILES['avatar']['type']))){
+                            $errors[] = 'Invalid file type. only jpeg, jpg, gif and png are accepted';
+                        }
+
+                        if(count($errors) === 0){
+
+                            if(copy($_FILES['avatar']['tmp_name'], $avatar_path)){
+
+                                        $sql = "UPDATE users SET avatar = '$avatar_path' WHERE email= '$id'";
+                                        $res = mysqli_query($conn, $sql);
+                                    }
+                        } else{
+                            foreach($errors as $error){
+                                echo '<script> alert("'.$error.'");</script>'; 
+                            }
+                            //  die();
+                        }
+
+                    }
 
                 //make sure file type is image
                 if(preg_match("!image!", $_FILES['avatar']['type'])){
