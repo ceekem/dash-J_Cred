@@ -66,8 +66,54 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $code = $_POST['code'];
                 // $password = $_POST['password'];
                 $avatar_path = $conn->real_escape_string('L_assets/images/avatar/'.$_FILES['avatar']['name']);
+                $cover_path = $conn->real_escape_string('L_assets/images/cover/'.$_FILES['cover']['name']);
+              
 
-                // print_r($avatar_path); die;
+                // if(preg_match('!image!', $_FILES['cover']['type'])){
+
+
+                //     if(copy($_FILES['cover']['tmp_name'], $cover_path)){
+
+                //         $sql = "UPDATE users SET cover = '$cover_path' WHERE email= '$id'";
+                //         $res = mysqli_query($conn, $sql);
+                //     }
+                // }
+
+                    if(isset($_FILES['cover'])){
+                        $errors = array();
+                        // $maxsize = '10M';
+                        $maxsize = 1097252;
+                        $acceptable = array(
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                            'image/png'
+                        );
+
+                        if(($_FILES['cover']['size'] >= $maxsize) || ($_FILES['cover']['size'] == 0)){
+                            $errors[] = 'File too large. File must be less than 2 megabytes.';
+                        }
+
+                        if((!in_array($_FILES['cover']['type'], $acceptable)) && (!empty($_FILES['cover']['type']))){
+                            $errors[] = 'Invalid file type. only jpeg, jpg, gif and png are accepted';
+                        }
+
+                        if(count($errors) === 0){
+
+                            if(copy($_FILES['cover']['tmp_name'], $cover_path)){
+
+                                        $sql = "UPDATE users SET cover = '$cover_path' WHERE email= '$id'";
+                                        $res = mysqli_query($conn, $sql);
+                                    }
+                        } else{
+                            foreach($errors as $error){
+                                echo '<script> alert("'.$error.'");</script>'; 
+                            }
+                             die();
+                        }
+
+                    }
+
 
                 //make sure file type is image
                 if(preg_match("!image!", $_FILES['avatar']['type'])){
@@ -438,8 +484,25 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     </div>
                     <div class="col-md-4">
                         <div class="card card-user">
-                            <div class="image">
-                                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
+                            <div class="image form-group">
+                                <!-- <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/> -->
+                                <label for="cover">
+                                  <?php if($row1['cover'] == ''){ ?>
+                                  <img class="cover" style="cursor:pointer;" src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
+                                  
+                                  <?php }
+                                        else {
+                                  ?>
+                                         <img class="cover" style="cursor:pointer;" src="<?php echo $row1['cover']?>" alt="..."/>
+                                  
+                                        <?php 
+                                        }
+                                        ?>    
+                                  </label>
+                                 
+                                    <input type="file" class="form-control" name="cover" id="cover" style="display:none;" accept="image/*">
+
+                           
                             </div>
                             <div class="content">
                                 <div class="author form-group">
@@ -544,6 +607,10 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     <script>
 
         document.getElementById('avatar').onchange = function(){
+            document.getElementById('av_btn').click();
+        };
+
+        document.getElementById('cover').onchange = function(){
             document.getElementById('av_btn').click();
         };
     
