@@ -1,6 +1,8 @@
 <?php 
-    require('php/db.php');
+		require('php/db.php');
+		require('PHPMailerAutoload.php');
 
+		
 ?>
 
 <!DOCTYPE html>
@@ -53,10 +55,10 @@
                 }
                 else{
                      if($row['email']==$username&&$row['password']==$password){
-                            if(strpos($row['type'], 'Admin') !== false){ 
+                            if(strpos($row['type'], 'admin') !== false){ 
 
                                  header('Location:dashboard.php?id='.$_POST['username']); // pass the user to the index page
-							
+																 
 								}else{
 
                                  header('Location: index.php'); // pass the user to the index page
@@ -124,27 +126,6 @@
 
 
 <!-- MODALS -->
-
-
-
-
-
-					
-					<!-- <div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							or sign up using
-						</span>
-					</div>
-
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
-
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-					</div> -->
 				</form>
 
 				<div class="login100-more" style="background-image: url('./L_assets/images/6.jpg');">
@@ -156,34 +137,80 @@
 	
 	<div class="overlay" id="modal02" data-backdrop>
   <button class="button" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
-  <form class="modal" onsubmit="return false;">
+  <form class="modal" method="post" >
     <header class="modal--header">
       <h3 class="modal--title">Forget password</h3>
     </header>
     <div class="modal--content">
-      <!-- <p>
-        <label for="name">Name</label><br>
-        <input id="name" type="text" name="fullname" autocomplete="fullname">
-      </p> -->
       <p>
         <label class="btnemail" for="email">Email</label><br>
-        <input id="email" type="email" name="email" autocomplete="email">
+        <input type="email" name="emailP">
       </p>
-      <!-- <p>
-        <label for="subject">Subject</label><br>
-        <input id="subject" type="text" name="subject" autocomplete="subject">
-      </p> -->
-      <!-- <p>
-        <label for="message">Message</label><br>
-        <textarea id="message" name="message"></textarea>
-      </p> -->
     </div>
     <footer class="modal--footer">
-      <button type="submit">Submit</button>
+      <button type="submit" name="sendmail">Submit</button>
     </footer>
   </form>
 </div>
 
+<?php
+ if(isset($_POST['sendmail'])){
+                
+	$emailP=$_POST['emailP'];
+	
+
+//	is_numeric($item['quantity'])
+
+
+
+	$sqlP="SELECT * FROM users WHERE email='$emailP'";
+	$resultP=mysqli_query($conn,$sqlP);
+	$rowP=mysqli_fetch_array($resultP);
+
+				if($emailP == ""){
+		 
+			 
+				}elseif ($emailP == $rowP['email']) {
+						$mail = new PHPMailer;
+
+						// $mail->SMTPDebug = 4;                               // Enable verbose debug output
+			
+						$mail->isSMTP();                                      // Set mailer to use SMTP
+						$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+						$mail->SMTPAuth = true;                               // Enable SMTP authentication
+						$mail->Username = EMAIL;                 // SMTP username
+						$mail->Password = PASS;                           // SMTP password
+						$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+						$mail->Port = 587;                                    // TCP port to connect to
+			
+						$mail->setFrom(EMAIL, 'J_CRED');
+						$mail->addAddress($_POST['emailP']);     // Add a recipient
+										 // Name is optional
+						// $mail->addReplyTo('info@example.com', 'Information');
+						// $mail->addCC('cc@example.com');
+						// $mail->addBCC('bcc@example.com');
+			
+						// $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+						// $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
+						$mail->isHTML(true);                                  // Set email format to HTML
+			
+						$mail->Subject = "Password Recovery";
+						$mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $emailP . "'>
+																	<p>Link</p>
+															 </a>";
+						 
+					
+			
+								if(!$mail->send()) {
+										echo 'Message could not be sent.';
+										echo 'Mailer Error: ' . $mail->ErrorInfo;
+							} else {
+										echo 'Message has been sent';
+							}
+					}
+}
+		
+?>
 
 	
 	

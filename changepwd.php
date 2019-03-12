@@ -60,7 +60,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 
                 
                 $oldPwd = $_POST['oldPwd'];
-                $newPwd1 = md5($_POST['newPwd1']);
+                $newPwd1 = $_POST['newPwd1'];
                 $newPwd2 = $_POST['newPwd2'];
                 
                 $sql = "SELECT * FROM users  WHERE email='$id'";
@@ -68,7 +68,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                         $row=mysqli_fetch_array($result);
 
                         if ($oldPwd === '') {
-                            echo "<div class='error-msg'>
+                            echo "<div id='incorrect' class='error-msg'>
                               <i class='fa fa-times-circle'></i>
                                 Please enter your current password
                            </div>";
@@ -80,7 +80,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                      </div>";
 
                      }elseif($row['password'] === $oldPwd && $newPwd1 === "" || $newPwd2 === ""){
-                             echo "<div class='error-msg'>
+                             echo "<div id='incorrect' class='error-msg'>
                                          <i class='fa fa-times-circle'></i>
                                            Enter your new password and confirm the password
                                   </div>";                
@@ -88,13 +88,13 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                      }elseif($row['password'] === $oldPwd && $newPwd1 === $newPwd2){
                              $sql = "UPDATE users SET password ='$newPwd1' WHERE email='$id'";
                              $res = mysqli_query($conn,$sql);
-                             echo "<div class='success-msg'>
+                             echo "<div id='success' class='success-msg'>
                                          <i class='fa fa-check'></i>
                                             Successfully Changed Password
                                   </div>";
      
                      }else{
-                         echo "<div class ='error-msg'>
+                         echo "<div id='incorrect' class ='error-msg'>
                                   <i class ='fa fa-times-circle'></i>
                                      Password do not match
                               </div>";
@@ -104,6 +104,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
             }//end of isset
         ?>
 
+    
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
 
     <!--
@@ -462,10 +463,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
+    <!--Timer of arlet messages  -->
+    <script src="assets/js/alertmessage.js"></script>
 
-<script>
-setTimeout(function(){
-    document.getElementById("incorrect").style.display='none';
-},3000);
-</script>
 </html>
