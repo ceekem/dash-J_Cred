@@ -115,8 +115,8 @@
 
     <div class="main-panel">
         <div class="content">
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container-fluid2">
+                <div class="row2">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">

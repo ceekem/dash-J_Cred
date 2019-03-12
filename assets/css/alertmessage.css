@@ -65,13 +65,16 @@
   z-index: 3;
 
 }
-.row{
-  display: flex !important;
-  justify-content: center !important;
+.row2{
+  display: flex;
+  justify-content: center;
+  margin-right: -15px;
+  margin-left: -15px;
 }
 
-.container-fluid{
-  margin-right: 23% !important;
-  margin-left: -6% !important;
-  margin-top: 10% !important;
+.container-fluid2{
+  margin-right: 20%;
+  margin-left: -6%;
+  margin-top: 10%;
+  
 }
