@@ -55,7 +55,7 @@
                 }
                 else{
                      if($row['email']==$username&&$row['password']==$password){
-                            if(strpos($row['type'], 'admin') !== false){ 
+                            if(strpos($row['type'], 'Admin') !== false){ 
 
                                  header('Location:dashboard.php?id='.$_POST['username']); // pass the user to the index page
 																 
