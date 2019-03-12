@@ -100,7 +100,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `fullname`, `phone`, `email`, `address`, `city`, `code`, `password`, `type`) VALUES
-(5, 'Holang Makhumisane', '0799832549', 'holang@gmail.com', '561 Netherlands Street, Nellmapius', 'Pretoria', '0162', '12345', 'client'),
+(5, 'Holang Makhumisane', '0799832549', 'vhuyositsula@gmail.com', '561 Netherlands Street, Nellmapius', 'Pretoria', '0162', '12345', 'admin'),
 (6, 'Raymond Mortu', '0799832549', 'ray@gmail.com', 'SBTI building 220 2nd st, Halfway House', 'Midrand', '1685', '12345', 'investor'),
 (7, 'Raymond Doe Mortu', '0736532113', 'doe@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk, Midrand', 'Cape Town', '1685', '123456', 'admin'),
 (8, 'doe Mortu', '0736532113', 'doe@doe.com', '383 willo rod', 'midrand', '1938', '123456', 'lendee'),

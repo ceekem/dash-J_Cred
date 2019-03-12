@@ -82,7 +82,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     if(isset($_FILES['cover'])){
                         $errors = array();
                         // $maxsize = '10M';
-                        $maxsize = 1097252;
+                        $maxsize = 10097252;
                         $acceptable = array(
                             'image/jpeg',
                             'image/jpg',
@@ -109,7 +109,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             foreach($errors as $error){
                                 echo '<script> alert("'.$error.'");</script>'; 
                             }
-                            //  die();
+                           // die();
                         }
 
                     }
@@ -120,7 +120,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     if(isset($_FILES['avatar'])){
                         $errors = array();
                         // $maxsize = '10M';
-                        $maxsize = 1097252;
+                        $maxsize = 10097252;
                         $acceptable = array(
                             'image/jpeg',
                             'image/jpg',
@@ -147,22 +147,22 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             foreach($errors as $error){
                                 echo '<script> alert("'.$error.'");</script>'; 
                             }
-                            //  die();
+                            // die();
                         }
 
                     }
 
-                //make sure file type is image
-                if(preg_match("!image!", $_FILES['avatar']['type'])){
+                // //make sure file type is image
+                // if(preg_match("!image!", $_FILES['avatar']['type'])){
 
-                    //copy image to images/avatar folder
-                    if(copy($_FILES['avatar']['tmp_name'], $avatar_path)){
+                //     //copy image to images/avatar folder
+                //     if(copy($_FILES['avatar']['tmp_name'], $avatar_path)){
 
-                        $sql = "UPDATE users SET avatar ='$avatar_path' WHERE email='$id'";       
-                         $res = mysqli_query($conn,$sql);
-                    }
+                //         $sql = "UPDATE users SET avatar ='$avatar_path' WHERE email='$id'";       
+                //          $res = mysqli_query($conn,$sql);
+                //     }
 
-                }
+                // }
 
                 
                 
