@@ -281,9 +281,12 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             <div class="header">
                                 <h4 class="title">User Table</h4>
                                 <p class="category">User</p>
+                                
                                 <div class = "plus">
-                                    <i onclick="Modal.open('#modal02')"  style="float: right;" class="pe-7s-plus" style="padding-right: 5px;"></i>
+                                    <button class="category" onclick="Modal.open('#modal02')" style="float: right;position: relative;bottom: 40px;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add User</button>
                                 </div>
+
+
                                 <label class="sch"><span class="schlab">Search:  </span><input class="schtxt" ng-model="searchText"></label>
                             </div>
                             <div ng-controller="userCtrl" class="content table-responsive table-full-width">
