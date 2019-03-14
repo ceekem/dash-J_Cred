@@ -66,14 +66,15 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $address = $conn->real_escape_string($_POST['address']);
                 $city = $conn->real_escape_string($_POST['city']);
                 $code = $conn->real_escape_string($_POST['code']);
+                $org = $conn->real_escape_string($_POST['org']);
                
 
                 if($name === '' && $email === '' ){
                         
                     }else{
                             //SQL statement to enter the items in the database
-                        $sql = "INSERT INTO users (type, fullname, email, phone, address, city, code)"
-                                ."VALUES ('$type', '$name','$email', '$phone', '$address', '$city', '$code')";
+                        $sql = "INSERT INTO users (type, fullname, email, phone, org, address, city, code)"
+                                ."VALUES ('$type', '$name','$email', '$phone','$org','$address', '$city', '$code')";
                         $res = mysqli_query($conn,$sql);
     
                         if (!$res) {
@@ -373,12 +374,30 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>Phone/label> -->
+                        <input type="text" class="form-control" name="phone" placeholder="Phone" value="" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>Organization</label> -->
+                        <input type="text" name="org" <?php 
+                                 if($row['type'] === 'Admin'){
+                                     echo 'style="float: right; display:none"';
+                                }
+                                 ?> class="form-control" placeholder="Organization" value="" required>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
                         <!-- <label>Address</label> -->
-                        <input type="text" class="form-control" name="phone" placeholder="Phone" value="" required>
+                        
                     </div>
                 </div>
             </div>
