@@ -144,7 +144,7 @@
     <div class="modal--content">
       <p>
         <label class="btnemail" for="email">Email</label><br>
-        <input type="email" name="emailP">
+        <input id="fp-input" type="email" name="emailP">
       </p>
     </div>
     <footer class="modal--footer">
