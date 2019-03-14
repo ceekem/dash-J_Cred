@@ -42,76 +42,17 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/fpwdmodal.css">
 
     <!-- <script src="./assets/js/angular.min.js"></script> -->
 
 </head>
 
 <body>
-        
-
-    <?php
+           <?php
                 $id = $_GET['id'];
-
-                $sql1= "SELECT * from  users where email= '$id'";
-                $res1 = mysqli_query($conn,$sql1);
-                $row = mysqli_fetch_array($res1);
             ?>
 
-<div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
-<?php
-            if(isset($_POST['save'])){
-                
-                $type = $conn->real_escape_string($_POST['type']);
-                $name = $conn->real_escape_string($_POST['name']);
-                //$idNo = $conn->real_escape_string($_POST['idNo']);
-                $email = $conn->real_escape_string($_POST['email']);
-                $phone = $conn->real_escape_string($_POST['phone']);
-                $bank = $conn->real_escape_string($_POST['bank']);
-                $acc_no = $conn->real_escape_string($_POST['acc_no']);
-                $status = $conn->real_escape_string($_POST['status']);
-                $address = $conn->real_escape_string($_POST['address']);
-                $city = $conn->real_escape_string($_POST['city']);
-                $code = $conn->real_escape_string($_POST['code']);
-                
-               
-
-                if($name === '' && $email === '' ){
-                        
-                    }else{
-                            //SQL statement to enter the items in the database
-                        $sql = "INSERT INTO users (type, fullname, email, phone, address, city, code)"
-                                ."VALUES ('$type', '$name', '$email', '$phone', '$address', '$city', '$code')";
-                        $res = mysqli_query($conn,$sql);
-
-                        $sql1 = "INSERT INTO employment_details (user_email,status, phone)"
-                                ."VALUES ('$email', '$status', '$phone')";
-                        $res1 = mysqli_query($conn,$sql1);
-
-                        $sql2 = "INSERT INTO bank_preferences (user_email, bank,account_number, account_holder)"
-                                ."VALUES ('$email','$bank','$acc_no' ,'$name')";
-                        $res2 = mysqli_query($conn,$sql2);
-
-                        
-    
-                        if (!$res || !$res1 || !$res2) {
-                            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                        } else {
-                            
-                            header('Location: users.php?id='.$id);
-                        }
-                        
-                    }
-
-                    
-
-        }
-
-    
-?>
-
+    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
 
     <!--
 
@@ -281,9 +222,6 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             <div class="header">
                                 <h4 class="title">User Table</h4>
                                 <p class="category">User</p>
-                                <div class = "plus">
-                                    <i onclick="Modal.open('#modal02')"  style="float: right;" class="pe-7s-plus" style="padding-right: 5px;"></i>
-                                </div>
                                 <label class="sch"><span class="schlab">Search:  </span><input class="schtxt" ng-model="searchText"></label>
                             </div>
                             <div ng-controller="userCtrl" class="content table-responsive table-full-width">
@@ -353,130 +291,6 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     </div>
 </div>
 
-<div class="overlay" id="modal02" data-backdrop>
-  <button class="button" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
-  <form class="modal modal2" style="width: 100%;" method="post" action="" enctype="multipart/form-data" role="form">
-    <header class="modal--header">
-      <h3 class="modal--title">Add Members</h3>
-    </header>
-    <div class="modal--content">
-       
-       <div class="row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <?php 
-                              echo '<select name="type" id="type" style="font-size: initial;"> 
-                                         <option value="Investor">Investor</option>
-                                         <option value="Lendee">Lendee</option>
-                                      </select>';
-                        ?>    
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    
-                </div>
-                <div class="col-md-4">
-                    
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- <label>Full Name</label> -->
-                        <input type="text" name="name" class="form-control" placeholder="Full Name" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- <label>ID Number</label> -->
-                        <input type="text" name="idNo" class="form-control" placeholder="ID Number" value="" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- <label>Phone</label> -->
-                        <input type="text" name="phone" class="form-control" placeholder="Phone" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- <label>Email</label> -->
-                        <input type="text" name="email" class="form-control" placeholder="Email" value="" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- <label>Bank Name</label> -->
-                        <input type="text" name="bank" class="form-control" placeholder="Bank Name" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- <label>Account Number</label> -->
-                        <input type="text" name="acc_no" class="form-control" placeholder="Account Number" value="" required>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                        <!-- <label>Status</label> -->
-                        <input type="text" name="status" class="form-control" placeholder="Employement Status" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <!-- <label>Address</label> -->
-                        <input type="text" class="form-control" name="address" placeholder="Home Address" value="" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <!-- <label>City</label> -->
-                        <input type="text" class="form-control" name="city" placeholder="City" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <!-- <label>Postal Code</label> -->
-                        <input type="number" class="form-control" name="code" placeholder="ZIP Code" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                   
-                </div>
-            </div>
-
-    </div>
-    <footer class="modal--footer">
-      <button type="submit" name="save">Submit</button>
-    </footer>
-  </form>
-</div>
 
 </body>
 
@@ -501,7 +315,6 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
 
-    <script src="assets/js/fpwdmodal.js"></script>
 
         <script>
              var fetch = angular.module('myapp', []);
