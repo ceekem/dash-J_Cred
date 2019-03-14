@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2019 at 12:01 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: Mar 14, 2019 at 12:40 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,7 +44,12 @@ CREATE TABLE `bank_preferences` (
 INSERT INTO `bank_preferences` (`id`, `user_email`, `bank`, `account_number`, `account_type`, `account_holder`) VALUES
 (1, 'holang@gmail.com', 'Standard Bank', '1234567', 'Savings', 'Holang Makhumisane'),
 (2, 'dawn@gmail.com', '', '', '', ''),
-(3, 'doe@doe.com', 'African Bank', '19182828384', 'current', 'Doe Mortu');
+(3, 'doe@doe.com', 'African Bank', '19182828384', 'current', 'Doe Mortu'),
+(4, 'koni@gmail.com', 'Stand V', '000111251455', NULL, 'Koni Sitsula'),
+(5, 'vhua@gmail.com', 'standard banek', '522246225', NULL, 'vhua sitsula'),
+(6, 'nompfa@gmail.com', 'absa', '022655845', NULL, 'nompfa sitsula'),
+(7, 'koni@gmail.com', 'Stand V', '000111251455', NULL, 'Koni Sitsula'),
+(8, 'konoi@gmail.com', 'absa', '000111251455', NULL, 'Koni Sitsula');
 
 -- --------------------------------------------------------
 
@@ -75,7 +80,12 @@ CREATE TABLE `employment_details` (
 INSERT INTO `employment_details` (`id`, `user_email`, `status`, `employer`, `phone`, `gross`, `nett`, `industry`, `position`, `time`, `contact`, `frequency`, `day`) VALUES
 (1, 'holang@gmail.com', 'Employed Full Time', 'KT Opportunities', '0799832548', '10000', '1000', 'IT', 'Developer', '1 year', '011 011 0111', 'Monthly', '31'),
 (2, 'dawn@gmail.com', '', '', '0', '0', '0', '0', '0', '0', '0', '0', '0'),
-(4, 'doe@doe.com', 'full time', 'Raymond Mortu', '0833832282', '50000', '45000', 'civil engineer', 'manager', '2years', '0110029837', 'monthly', '31');
+(4, 'doe@doe.com', 'full time', 'Raymond Mortu', '0833832282', '50000', '45000', 'civil engineer', 'manager', '2years', '0110029837', 'monthly', '31'),
+(5, 'koni@gmail.com', 'Employed', NULL, '0729756814', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'vhua@gmail.com', 'Employed', NULL, '0729756814', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'nompfa@gmail.com', 'Employed', NULL, '0729756845', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'koni@gmail.com', 'Employed', NULL, '0729756845', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'konoi@gmail.com', 'Employed', NULL, '0729756814', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -85,6 +95,7 @@ INSERT INTO `employment_details` (`id`, `user_email`, `status`, `employer`, `pho
 
 CREATE TABLE `users` (
   `uid` int(11) NOT NULL,
+  `date_added` datetime(6) DEFAULT CURRENT_TIMESTAMP(6),
   `fullname` varchar(255) NOT NULL,
   `phone` varchar(11) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -93,6 +104,7 @@ CREATE TABLE `users` (
   `code` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL DEFAULT 'admin12',
   `type` varchar(255) NOT NULL,
+  `org` varchar(225) NOT NULL,
   `avatar` varchar(100) NOT NULL,
   `cover` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -101,15 +113,14 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `fullname`, `phone`, `email`, `address`, `city`, `code`, `password`, `type`, `avatar`, `cover`) VALUES
-(5, 'Holang Makhumisane', '0799832549', 'holang@gmail.com', '561 Netherlands Street, Nellmapius', 'Pretoria', '0162', '12345', 'lendee', '', ''),
-(6, 'Raymond Mortu', '0799832549', 'ray@gmail.com', 'SBTI building 220 2nd st, Halfway House', 'Midrand', '1685', '12345', 'investor', '', ''),
-(7, 'Raymond Doe Mortu', '0736532113', 'doe@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '1686', '123456', 'Admin', 'L_assets/images/avatar/gif1.gif', 'L_assets/images/cover/cool-wallpaper-4.jpg'),
-(8, 'doe Mortu', '0736532113', 'doe@doe.com', '383 willo rod', 'midrand', '1938', '123456', 'lendee', '', ''),
-(9, 'k Joe', '0728372288', 'joe@gmai.com', '', '', '', '123456', 'investor', '', ''),
-(23, 'Joe Dre', '0736532113', 'joe@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '1092', '1844156d4166d94387f1a4ad031ca5fa', 'Super-Admin', '', ''),
-(24, 'dre bordons', '0736532113', 'dre@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '2023', 'admin12', 'Super-Admin', 'L_assets/images/avatar/angry.png', ''),
-(25, 'brod brad', '0736532113', 'brod@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '1234', 'admin12', 'Admin', '', '');
+INSERT INTO `users` (`uid`, `date_added`, `fullname`, `phone`, `email`, `address`, `city`, `code`, `password`, `type`, `org`, `avatar`, `cover`) VALUES
+(5, '2019-03-14 11:35:39.987965', 'Holang Makhumisane', '0799832549', 'vhuyositsula@gmail.com', '561 Netherlands Street, Nellmapius', 'Pretoria', '0162', '12345', 'Admin', '', '', ''),
+(6, '2019-03-14 11:35:39.987965', 'Raymond Mortu', '0799832549', 'ray@gmail.com', 'SBTI building 220 2nd st, Halfway House', 'Midrand', '1685', '12345', 'Super-Admin', '', '', ''),
+(7, '2019-03-14 11:35:39.987965', 'Raymond Doe Mortu', '0736532113', 'doe@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '1686', '123456', 'Admin', '', 'L_assets/images/avatar/gif1.gif', 'L_assets/images/cover/cool-wallpaper-4.jpg'),
+(8, '2019-03-14 11:35:39.987965', 'doe Mortu', '0736532113', 'doe@doe.com', '383 willo rod', 'midrand', '1938', '123456', 'lendee', '', '', ''),
+(9, '2019-03-14 11:35:39.987965', 'k Joe', '0728372288', 'joe@gmai.com', '', '', '', '123456', 'investor', '', '', ''),
+(23, '2019-03-14 11:35:39.987965', 'Joe Dre', '0736532113', 'joe@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '1092', '1844156d4166d94387f1a4ad031ca5fa', 'Super-Admin', '', '', ''),
+(24, '2019-03-14 11:35:39.987965', 'dre bordons', '0736532113', 'dre@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '2023', 'admin12', 'Super-Super-Admin', '', 'L_assets/images/avatar/angry.png', '');
 
 --
 -- Indexes for dumped tables
@@ -141,19 +152,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bank_preferences`
 --
 ALTER TABLE `bank_preferences`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `employment_details`
 --
 ALTER TABLE `employment_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

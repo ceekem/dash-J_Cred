@@ -226,7 +226,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             </div>
                             <div ng-controller="userCtrl" class="content table-responsive table-full-width">
                               
-                                <table class="table table-hover table-striped">
+                                <table id="userTable" class="table table-hover table-striped">
                                     <thead>
                                         <th>ID</th>
                                     	<th>Name</th>
@@ -245,7 +245,8 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                         </tr>
                                     </tbody>
                                 </table>
-
+                                <br>
+                                    <input type="button" style="margin: 20px;" value="Export to Excel" ng-click="Export()">
                             </div>
                         </div>
                     </div>
@@ -314,7 +315,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
-
+    <script src="assets/js/table2excel.js"></script>
 
         <script>
              var fetch = angular.module('myapp', []);
@@ -327,6 +328,16 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     //store response data
                     $scope.users = response.data;
                 });
+
+                $scope.Export = function (){
+
+                    $scope.date = new Date();
+
+                    $("#userTable").table2excel({
+                        filename: "DataTable("+ $scope.date +").xls"
+                    });
+                }
+
             }]);
 
         </script>

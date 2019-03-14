@@ -47,6 +47,8 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 </head>
 <body>
             <?php
+          
+
                 $id = $_GET['id'];
             ?>
 
@@ -226,7 +228,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             </div>
                             <div class="content">
                                 <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
+                                <!-- <div id="piechart"></div> -->
                                 <div class="footer">
                                     <div class="legend">
                                         <i class="fa fa-circle text-info"></i> Investors
@@ -472,7 +474,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     <script src="assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
@@ -496,5 +498,6 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
     	});
 	</script>
+
 
 </html>
