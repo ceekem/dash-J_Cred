@@ -229,9 +229,9 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
                                 <div class="footer">
                                     <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Investors
-                                        <i class="fa fa-circle text-danger"></i> Borrowers
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                        <i class="fa fa-circle text-info"></i> Payed
+                                        <i class="fa fa-circle text-danger"></i> Unauthorized
+                                        <i class="fa fa-circle text-warning"></i> Outstanding
                                     </div>
                                     <hr>
                                     <div class="stats">
