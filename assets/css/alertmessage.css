@@ -8,6 +8,12 @@
   padding: 10px;
   border-radius: 3px 3px 3px 3px;
 }
+
+.success-msg2,
+.error-msg2 {
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
 /* .info-msg {
   color: #059;
   background-color: #bef;
@@ -23,6 +29,17 @@
   position: fixed;
   z-index: 3;
 }
+
+.success-msg2 {
+  color: #270;
+  background-color: #dff2bf;
+  text-align: center;
+  width:  100%;
+  position: fixed;
+  z-index: 3;
+}
+
+
 /* .warning-msg {
   color: #9f6000;
   background-color: #feefb3;
@@ -39,5 +56,25 @@
   z-index: 3;
 
 }
+.error-msg2 {
+  color: #d8000c;
+  background-color: #ffbaba;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  z-index: 3;
 
+}
+.row2{
+  display: flex;
+  justify-content: center;
+  margin-right: -15px;
+  margin-left: -15px;
+}
 
+.container-fluid2{
+  margin-right: 20%;
+  margin-left: -6%;
+  margin-top: 10%;
+  
+}

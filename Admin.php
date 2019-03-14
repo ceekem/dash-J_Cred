@@ -66,15 +66,14 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $address = $conn->real_escape_string($_POST['address']);
                 $city = $conn->real_escape_string($_POST['city']);
                 $code = $conn->real_escape_string($_POST['code']);
-                $org = $conn->real_escape_string($_POST['org']);
                
 
                 if($name === '' && $email === '' ){
                         
                     }else{
                             //SQL statement to enter the items in the database
-                        $sql = "INSERT INTO users (type, fullname, org, email, phone, address, city, code)"
-                                ."VALUES ('$type', '$name','$org','$email', '$phone', '$address', '$city', '$code')";
+                        $sql = "INSERT INTO users (type, fullname, email, phone, address, city, code)"
+                                ."VALUES ('$type', '$name','$email', '$phone', '$address', '$city', '$code')";
                         $res = mysqli_query($conn,$sql);
     
                         if (!$res) {
@@ -262,7 +261,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                 <h4 class="title">Administrators</h4>
                                 
                                  <button class="category" <?php 
-                                 if(($row['type'] != 'Super-Super-Admin') && ($row['type'] != 'Super-Admin')){
+                                 if($row['type'] != 'Super-Admin'){
                                     echo 'style="float: right; display:none;';
                                 }
                                  ?> onclick="Modal.open('#modal02')" style="float: right;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add admin</button>
@@ -275,7 +274,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     	<th>Name</th>
                                     	<th>Admin Type</th>
                                     	<th>Phone</th>
-                                        <th>Email</th>
+                                    	<th>Email</th>
                                     </thead>
                                     <tbody>
                                     <!-- Display records  -->
@@ -346,23 +345,10 @@ if(!isset($_SERVER['HTTP_REFERER'])){
        <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-
-                    <?php 
-                                 if($row['type'] === 'Super-Super-Admin'){
-                                    echo '<select name="type" id="type" style="font-size: initial;"> 
-                                            <option value="Admin">Admin</option>
-                                            <option value="Super-Admin">Super-Admin</option>
-                                            <option value="Super-Admin">Super-Super-Admin</option>
-                                          </select>     ';
-                                }else if($row['type'] === 'Super-Admin'){
-
-                                    echo '<select name="type" id="type" style="font-size: initial;"> 
-                                             <option value="Admin">Admin</option>
-                                             <option value="Super-Admin">Super-Admin</option>
-                                          </select> ';
-                                }
-                                 ?>
-                           
+                        <select name="type" id="type" style="font-size: initial;"> 
+                            <option value="Admin">Admin</option>
+                            <option value="Super-Admin">Super-Admin</option>
+                        </select>        
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -389,20 +375,10 @@ if(!isset($_SERVER['HTTP_REFERER'])){
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <!-- <label>Phone</label> -->
-                        <input type="text" name="phone" class="form-control" placeholder="Phone" value="" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- <label>Organization</label> -->
-                        <input type="text" name="org"<?php 
-                        if($row['type'] != 'Super-Super-Admin'){
-                            echo 'style="float: right; display:none;';
-                        }
-                        ?> class="form-control" placeholder="Organization" value="" required>
+                        <!-- <label>Address</label> -->
+                        <input type="text" class="form-control" name="phone" placeholder="Phone" value="" required>
                     </div>
                 </div>
             </div>

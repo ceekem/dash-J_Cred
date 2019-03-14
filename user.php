@@ -109,7 +109,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             foreach($errors as $error){
                                 echo '<script> alert("'.$error.'");</script>'; 
                             }
-                            //  die();
+                           // die();
                         }
 
                     }
@@ -147,7 +147,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             foreach($errors as $error){
                                 echo '<script> alert("'.$error.'");</script>'; 
                             }
-                            //  die();
+                            // die();
                         }
 
                     }

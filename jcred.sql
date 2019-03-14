@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2019 at 01:15 PM
+-- Generation Time: Mar 12, 2019 at 12:01 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -91,20 +91,25 @@ CREATE TABLE `users` (
   `address` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL DEFAULT 'admin12',
+  `type` varchar(255) NOT NULL,
+  `avatar` varchar(100) NOT NULL,
+  `cover` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `fullname`, `phone`, `email`, `address`, `city`, `code`, `password`, `type`) VALUES
-(5, 'Holang Makhumisane', '0799832549', 'holang@gmail.com', '561 Netherlands Street, Nellmapius', 'Pretoria', '0162', '12345', 'client'),
-(6, 'Raymond Mortu', '0799832549', 'ray@gmail.com', 'SBTI building 220 2nd st, Halfway House', 'Midrand', '1685', '12345', 'investor'),
-(7, 'Raymond Doe Mortu', '0736532113', 'doe@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk, Midrand', 'Cape Town', '1685', '123456', 'admin'),
-(8, 'doe Mortu', '0736532113', 'doe@doe.com', '383 willo rod', 'midrand', '1938', '123456', 'lendee'),
-(9, 'k Joe', '0728372288', 'joe@gmai.com', '', '', '', '123456', 'investor');
+INSERT INTO `users` (`uid`, `fullname`, `phone`, `email`, `address`, `city`, `code`, `password`, `type`, `avatar`, `cover`) VALUES
+(5, 'Holang Makhumisane', '0799832549', 'holang@gmail.com', '561 Netherlands Street, Nellmapius', 'Pretoria', '0162', '12345', 'lendee', '', ''),
+(6, 'Raymond Mortu', '0799832549', 'ray@gmail.com', 'SBTI building 220 2nd st, Halfway House', 'Midrand', '1685', '12345', 'investor', '', ''),
+(7, 'Raymond Doe Mortu', '0736532113', 'doe@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '1686', '123456', 'Admin', 'L_assets/images/avatar/gif1.gif', 'L_assets/images/cover/cool-wallpaper-4.jpg'),
+(8, 'doe Mortu', '0736532113', 'doe@doe.com', '383 willo rod', 'midrand', '1938', '123456', 'lendee', '', ''),
+(9, 'k Joe', '0728372288', 'joe@gmai.com', '', '', '', '123456', 'investor', '', ''),
+(23, 'Joe Dre', '0736532113', 'joe@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '1092', '1844156d4166d94387f1a4ad031ca5fa', 'Super-Admin', '', ''),
+(24, 'dre bordons', '0736532113', 'dre@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '2023', 'admin12', 'Super-Admin', 'L_assets/images/avatar/angry.png', ''),
+(25, 'brod brad', '0736532113', 'brod@gmail.com', '383 Willow Crest, Sagewood st, Noordwyk', 'Cape Town', '1234', 'admin12', 'Admin', '', '');
 
 --
 -- Indexes for dumped tables
@@ -148,7 +153,7 @@ ALTER TABLE `employment_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
