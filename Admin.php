@@ -261,8 +261,8 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                 <h4 class="title">Administrators</h4>
                                 
                                  <button class="category" <?php 
-                                 if($row['type'] != 'Super-Admin'){
-                                    echo 'style="float: right; display:none;';
+                                 if($row['type'] === 'Admin'){
+                                     echo 'style="float: right; display:none"';
                                 }
                                  ?> onclick="Modal.open('#modal02')" style="float: right;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add admin</button>
                              
