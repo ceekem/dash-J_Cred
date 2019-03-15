@@ -58,7 +58,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $row = mysqli_fetch_array($res1);
             ?>
 
-<div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+<div class="sidebar" data-color="orange" data-image="assets/img/sidebar-5.jpg">
 
 <?php
             if(isset($_POST['save'])){
@@ -268,8 +268,8 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">User Table</h4>
-                                <p class="category">User</p>
+                                <h4 class="title">Members Table</h4>
+                                <p class="category">Members</p>
                                 <!-- <div class = "plus">
                                     <i onclick="Modal.open('#modal02')"  style="float: right;" class="pe-7s-plus" style="padding-right: 5px;"></i>
                                 </div> -->
@@ -286,7 +286,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     <thead>
                                         <th>ID</th>
                                     	<th>Name</th>
-                                    	<th>User Type</th>
+                                    	<th>status</th>
                                     	<th>Phone</th>
                                     	<th>Email</th>
                                     </thead>
