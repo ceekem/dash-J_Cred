@@ -122,14 +122,15 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 <li>
                     <a href="users.php?id=<?php echo $id;?>">
                         <i class="pe-7s-note2"></i>
-                        <p>Users</p>
+                        <p>Members</p>
                     </a>
                 </li>
                 <li>
-                    <a href="employmentdetails.php?id=<?php echo $id;?>">
+                    <!-- <a href="employmentdetails.php?id=<?php //echo $id;?>">
                         <i class="pe-7s-albums"></i>
                         <p>Employment Details</p>
-                    </a>
+                    </a> -->
+                </li>
                 </li>
                 <li class="active">
                     <a href="Admin.php?id=<?php echo $id;?>">
