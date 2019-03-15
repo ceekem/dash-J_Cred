@@ -51,7 +51,7 @@
 
 </head>
 
-<body  style="background-image: url('./L_assets/images/6.jpg');">
+<body  style="background-image: url('./L_assets/images/66.jpg');">
             <?php
                 $id = $_GET['id'];
             ?>
@@ -59,7 +59,7 @@
 <?php
             if(isset($_POST['savePwd'])){
                 
-                $newPwd1 = $_POST['newPwd1'];
+                $newPwd1 = md5($_POST['newPwd1']);
                 $newPwd2 = $_POST['newPwd2'];
                 
                 $sql = "SELECT * FROM users  WHERE email='$id'";
