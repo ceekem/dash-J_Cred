@@ -347,10 +347,21 @@ if(!isset($_SERVER['HTTP_REFERER'])){
        <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-                        <select name="type" id="type" style="font-size: initial;"> 
-                            <option value="Admin">Admin</option>
-                            <option value="Super-Admin">Super-Admin</option>
-                        </select>        
+                    <?php 
+                                 if($row['type'] === 'Super-Super-Admin'){
+                                    echo '<select name="type" id="type" style="font-size: initial;"> 
+                                            <option value="Admin">Admin</option>
+                                            <option value="Super-Admin">Super-Admin</option>
+                                            <option value="Super-Admin">Super-Super-Admin</option>
+                                          </select>     ';
+                                }else if($row['type'] === 'Super-Admin'){
+                                    echo '<select name="type" id="type" style="font-size: initial;"> 
+                                             <option value="Admin">Admin</option>
+                                             <option value="Super-Admin">Super-Admin</option>
+                                          </select> ';
+                                }
+                                 ?>
+    
                     </div>
                 </div>
                 <div class="col-md-3">
