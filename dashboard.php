@@ -492,7 +492,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
         	$.notify({
             	icon: 'pe-7s-gift',
-                message: "Welcome to <b>J-Cred Dashboard</b>."
+                message: "Welcome to <b>PEOSA Dashboard</b>."
 
             },{
                 type: 'info',
