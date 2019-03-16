@@ -17,7 +17,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 	<link rel="icon" type="image/png" href="./L_assets/images/j-Cred_ico.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>J-Cred</title>
+	<title>PEOSA</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
