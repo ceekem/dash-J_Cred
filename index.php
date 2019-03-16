@@ -1,10 +1,7 @@
-<?php 
-		require('php/db.php');
-		require('PHPMailerAutoload.php');
-
-		
+<?php
+require('php/db.php');
+require('PHPMailerAutoload.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,19 +45,16 @@
                 $result=mysqli_query($conn,$sql);
                 $row=mysqli_fetch_array($result);
                 
-                if($_POST['username'] ===''&&$_POST['password']===''){
+                if($_POST['username'] ==='' && $_POST['password']===''){
                    
                      header('Location: index.php'); //reload the index page
 
                 }
                 else{
-                     if($row['email']==$username&&$row['password']==$password){
+                     if($row['email']==$username && $row['password'] == $password){
                             if(strpos($row['type'], 'Admin') !== false){ 
-
-                                 header('Location:dashboard.php?id='.$_POST['username']); // pass the user to the index page
-																 
+                                 header('Location:dashboard.php?id='.$_POST['username']); // pass the user to the index page			 
 								}else{
-
                                  header('Location: index.php'); // pass the user to the index page
                             }
                               
@@ -184,7 +178,7 @@
 						$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 						$mail->Port = 587;                                    // TCP port to connect to
 			
-						$mail->setFrom(EMAIL, 'J_CRED');
+						$mail->setFrom(EMAIL, 'PEOSA');
 						$mail->addAddress($_POST['emailP']);     // Add a recipient
 										 // Name is optional
 						// $mail->addReplyTo('info@example.com', 'Information');
