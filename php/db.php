@@ -1,8 +1,16 @@
 <?php
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'jcred';
+// $servername = 'localhost';
+// $username = 'root';
+// $password = '';
+// $dbname = 'jcred';
+
+$servername = 'localhost:3306';
+$username = 'binarjlg_admin';
+$password = 'bW[6i@Ro,I2-';
+$dbname = 'binarjlg_admin';
+
+
+
 //create connection to DB
 $conn = new mysqli($servername,$username,$password,$dbname);
 //       // Check connection
