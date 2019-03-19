@@ -1,7 +1,6 @@
 <?php
 include 'php/db.php';
 
-
 $sel_e = mysqli_query($conn, "SELECT * FROM `users`,`employment_details`,`bank_preferences` WHERE users.email = employment_details.user_email AND users.email = bank_preferences.user_email");
 
 

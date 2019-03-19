@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" href="./L_assets/images/j-Cred_ico.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>J-Cred</title>
+	<title>PEOSA</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -51,7 +51,7 @@
 
 </head>
 
-<body  style="background-image: url('./L_assets/images/6.jpg');">
+<body  style="background-image: url('./L_assets/images/66.jpg');">
             <?php
                 $id = $_GET['id'];
             ?>
@@ -59,7 +59,7 @@
 <?php
             if(isset($_POST['savePwd'])){
                 
-                $newPwd1 = $_POST['newPwd1'];
+                $newPwd1 = md5($_POST['newPwd1']);
                 $newPwd2 = $_POST['newPwd2'];
                 
                 $sql = "SELECT * FROM users  WHERE email='$id'";
