@@ -101,7 +101,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                         } else {
                             
-                            header('Location: users.php?id='.$id);
+                            header('Location: members.php?id='.$id);
                         }
                         
                     }
