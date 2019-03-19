@@ -375,7 +375,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     echo '<select name="type" id="type" style="font-size: initial;"> 
                                             <option value="Admin">Admin</option>
                                             <option value="Super-Admin">Super-Admin</option>
-                                            <option value="Super-Admin">Super-Super-Admin</option>
+                                            <option value="Super-Super-Admin">Super-Super-Admin</option>
                                           </select>     ';
                                 }else if($row['type'] === 'Super-Admin'){
                                     echo '<select name="type" id="type" style="font-size: initial;"> 
