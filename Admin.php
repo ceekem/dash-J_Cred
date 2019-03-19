@@ -6,6 +6,8 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 }
     ob_start();
     require('php/db.php');
+    require('PHPMailerAutoload.php');
+
 ?>
 
 
@@ -57,6 +59,9 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 
 <?php
+
+
+
             if(isset($_POST['save'])){
                 
                 $type = $conn->real_escape_string($_POST['type']);
@@ -67,8 +72,17 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $city = $conn->real_escape_string($_POST['city']);
                 $code = $conn->real_escape_string($_POST['code']);
                 $org = $conn->real_escape_string($_POST['org']);
-               
-                if ($row['type'] !== 'Super-Super-Admin') {
+
+
+                $sqlP="SELECT * FROM users WHERE email='$email'";
+                $resultP=mysqli_query($conn,$sqlP);
+                $rowP=mysqli_fetch_array($resultP);
+
+  
+             if($email == $rowP['email']) {
+                 
+                if ($row['type'] !== 'Super-Super-Admin') 
+                {
                     
                         //SQL statement to enter the items in the database
                         $org2 = $row['org'];
@@ -95,7 +109,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                      header('Location: Admin.php?id='.$id);
                      }
                 }
-
+            }
         }
 ?>
 
@@ -489,108 +503,143 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 </div>
 
 <?php
- if(isset($_POST['save'])){
+ if(isset($_POST['save']) ){
                 
 	// $emailP=$_POST['emailP'];
 	
 
 //	is_numeric($item['quantity'])
 
-
-
-	$sqlP="SELECT * FROM users WHERE email='$email'";
-	$resultP=mysqli_query($conn,$sqlP);
-	$rowP=mysqli_fetch_array($resultP);
+	
 
 				if($email == ""){
 		 
 			 
-				}elseif ($email == $rowP['email']) {
-						$mail = new PHPMailer;
+				}else {
 
-						// $mail->SMTPDebug = 4;                               // Enable verbose debug output
+                    $mail = new PHPMailer;
+
+                    // $mail->SMTPDebug = 4;                               // Enable verbose debug output
+        
+                    $mail->isSMTP();                                      // Set mailer to use SMTP
+                    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                    $mail->Username = EMAIL;                 // SMTP username
+                    $mail->Password = PASS;                           // SMTP password
+                    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 587;                                    // TCP port to connect to
+        
+                    $mail->setFrom(EMAIL, 'PEOSA');
+                    $mail->addAddress($_POST['email']);     // Add a recipient
+                                     // Name is optional
+                    // $mail->addReplyTo('info@example.com', 'Information');
+                    // $mail->addCC('cc@example.com');
+                    // $mail->addBCC('bcc@example.com');
+        
+                    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+                    // $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
+                    $mail->isHTML(true);                                  // Set email format to HTML
+        
+                    $mail->Subject = "Create Password";
+                    $mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $emailP . "'>
+                                                                <p>Link</p>
+                                                         </a>";
+                     
+                
+        
+                            if(!$mail->send()) {
+                                    echo 'Message could not be sent.';
+                                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                        } else {
+                                    echo 'Message has been sent';
+                        }
+                }
+
+					// 	$mail = new PHPMailer;
+
+					// 	// $mail->SMTPDebug = 4;                               // Enable verbose debug output
 			
-						$mail->isSMTP();                                      // Set mailer to use SMTP
-						$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-						$mail->SMTPAuth = true;                               // Enable SMTP authentication
-						$mail->Username = EMAIL;                 // SMTP username
-						$mail->Password = PASS;                           // SMTP password
-						$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-						$mail->Port = 587;                                    // TCP port to connect to
+					// 	$mail->isSMTP();                                      // Set mailer to use SMTP
+					// 	$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+					// 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
+					// 	$mail->Username = EMAIL;                 // SMTP username
+					// 	$mail->Password = PASS;                           // SMTP password
+					// 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+					// 	$mail->Port = 587;                                    // TCP port to connect to
 			
-						$mail->setFrom(EMAIL, 'Peosa');
-						$mail->addAddress($_POST['emailP']);     // Add a recipient
-										 // Name is optional
-						// $mail->addReplyTo('info@example.com', 'Information');
-						// $mail->addCC('cc@example.com');
-						// $mail->addBCC('bcc@example.com');
+					// 	$mail->setFrom(EMAIL, 'Peosa');
+					// 	$mail->addAddress($_POST['email']);     // Add a recipient
+					// 					 // Name is optional
+					// 	// $mail->addReplyTo('info@example.com', 'Information');
+					// 	// $mail->addCC('cc@example.com');
+					// 	// $mail->addBCC('bcc@example.com');
 			
-						// $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-						// $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
-						$mail->isHTML(true);                                  // Set email format to HTML
+					// 	// $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+					// 	// $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
+					// 	$mail->isHTML(true);                                  // Set email format to HTML
 			
-						$mail->Subject = "Password Recovery";
-						$mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $email . "'>
-																	<p>Link</p>
-															 </a>";
+					// 	$mail->Subject = "Password Recovery";
+					// 	$mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $email . "'>
+					// 												<p>Link</p>
+					// 										 </a>";
 						 
 					
 			
-								if(!$mail->send()) {
-										echo '<script type="text/javascript">
-                                        $(document).ready(function(){
+					// 			if(!$mail->send()) {
+					// 					echo '<script type="text/javascript">
+                    //                     $(document).ready(function(){
                                 
-                                            demo.initChartist();
+                    //                         demo.initChartist();
                                 
-                                            $.notify({
-                                                icon: "pe-7s-gift",
-                                                message: "email to new created admin could not be sent</b>."
+                    //                         $.notify({
+                    //                             icon: "pe-7s-gift",
+                    //                             message: "email to new created admin could not be sent</b>."
                                 
-                                            },{
-                                                type: "info",
-                                                timer: 4000
-                                            });
+                    //                         },{
+                    //                             type: "info",
+                    //                             timer: 4000
+                    //                         });
                                 
-                                        });
-                                    </script>.';
-										echo '<script type="text/javascript">
-                                        $(document).ready(function(){
+                    //                     });
+                    //                 </script>.';
+					// 					echo '<script type="text/javascript">
+                    //                     $(document).ready(function(){
                                 
-                                            demo.initChartist();
+                    //                         demo.initChartist();
                                 
-                                            $.notify({
-                                                icon: "pe-7s-gift",
-                                                message: "Error :- '. $mail->ErrorInfo .'</b>."
+                    //                         $.notify({
+                    //                             icon: "pe-7s-gift",
+                    //                             message: "Error :- '. $mail->ErrorInfo .'</b>."
                                 
-                                            },{
-                                                type: "info",
-                                                timer: 4000
-                                            });
+                    //                         },{
+                    //                             type: "info",
+                    //                             timer: 4000
+                    //                         });
                                 
-                                        });
-                                    </script> ' ;
+                    //                     });
+                    //                 </script> ' ;
 
                                         
 										
-							}else{
-                                echo '<script type="text/javascript">
-                                        $(document).ready(function(){
+					// 		}else{
+                    //             echo '<script type="text/javascript">
+                    //                     $(document).ready(function(){
                                 
-                                            demo.initChartist();
+                    //                         demo.initChartist();
                                 
-                                            $.notify({
-                                                icon: "pe-7s-gift",
-                                                message: "Administrator created</b>."
+                    //                         $.notify({
+                    //                             icon: "pe-7s-gift",
+                    //                             message: "Administrator created</b>."
                                 
-                                            },{
-                                                type: "info",
-                                                timer: 4000
-                                            });
+                    //                         },{
+                    //                             type: "info",
+                    //                             timer: 4000
+                    //                         });
                                 
-                                        });
-                                    </script>';
-                            }
-					}
+                    //                     });
+                    //                 </script>';
+                    //         }
+					// }
     }
 		
 ?>
