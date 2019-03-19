@@ -68,23 +68,33 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $code = $conn->real_escape_string($_POST['code']);
                 $org = $conn->real_escape_string($_POST['org']);
                
-
-                if($name === '' && $email === '' ){
-                        
-                    }else{
-                            //SQL statement to enter the items in the database
-                        $sql = "INSERT INTO users (type, fullname, email, phone, org, address, city, code)"
-                                ."VALUES ('$type', '$name','$email', '$phone','$org','$address', '$city', '$code')";
+                if ($row['type'] !== 'Super-Super-Admin') {
+                    
+                        //SQL statement to enter the items in the database
+                        $org2 = $row['org'];
+                        $sql = "INSERT INTO users (type, fullname, email, org, phone, address, city, code)"
+                             ."VALUES ('$type', '$name','$email','$org2', '$phone','$address', '$city', '$code')";
                         $res = mysqli_query($conn,$sql);
-    
+ 
                         if (!$res) {
-                            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                              echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                         } else {
-                            
-                            header('Location: Admin.php?id='.$id);
-                        }
-                        
-                    }
+                         
+                         header('Location: Admin.php?id='.$id);
+                     }
+                          
+                }else{
+                    //SQL statement to enter the items in the database
+                    $sql = "INSERT INTO users (type, fullname, email, org, phone, address, city, code)"
+                             ."VALUES ('$type', '$name','$email','$org', '$phone','$address', '$city', '$code')";
+                    $res = mysqli_query($conn,$sql);
+ 
+                    if (!$res) {
+                      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                    } else {
+                     header('Location: Admin.php?id='.$id);
+                     }
+                }
 
         }
 ?>
@@ -420,17 +430,11 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     <div class="form-group">
                         <!-- <label>Organization</label> -->
                         <input type="text" name="org" <?php 
-                                 if(($row['type'] === 'Admin') || ($row['type'] === 'Super-Admin')){
-                                   ?>   
-                                    style="float: right; display:none" value="<?php echo $row['org'] ?>"
-                                  <?php   
-                                }else{
-                                ?>
-
-                                    style="float: right;" value=""
-
-                                   <?php }?> 
-                                 class="form-control" placeholder="Organization"  required>
+                                 if($row['type'] != 'Super-Super-Admin'){
+                                     echo 'style="float: right; display:none"';
+                                }
+                                 ?> class="form-control" placeholder="Organization">
+                                
                     </div>
                 </div>
             </div>

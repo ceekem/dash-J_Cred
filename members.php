@@ -76,15 +76,16 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $address = $conn->real_escape_string($_POST['address']);
                 $city = $conn->real_escape_string($_POST['city']);
                 $code = $conn->real_escape_string($_POST['code']);
+                $org = $conn->real_escape_string($_POST['org']);
                 
                
 
-                if($name === '' && $email === '' ){
+                if ($row['type'] !== 'Super-Super-Admin'){
                         
-                    }else{
+                    $org2 = $row['org'];
                             //SQL statement to enter the items in the database
-                        $sql = "INSERT INTO users (type, fullname, email, phone, address, city, code)"
-                                ."VALUES ('$type', '$name', '$email', '$phone', '$address', '$city', '$code')";
+                        $sql = "INSERT INTO users (type, fullname, email, org, phone, address, city, code)"
+                                ."VALUES ('$type', '$name', '$email', '$org2' ,'$phone', '$address', '$city', '$code')";
                         $res = mysqli_query($conn,$sql);
 
                         $sql1 = "INSERT INTO employment_details (user_email,status, phone)"
@@ -104,9 +105,28 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                             header('Location: members.php?id='.$id);
                         }
                         
-                    }
+                    }else{
+                        $sql = "INSERT INTO users (type, fullname, email, org, phone, address, city, code)"
+                               ."VALUES ('$type', '$name', '$email', '$org' ,'$phone', '$address', '$city', '$code')";
+                        $res = mysqli_query($conn,$sql);
 
+                        $sql1 = "INSERT INTO employment_details (user_email,status, phone)"
+                              ."VALUES ('$email', '$status', '$phone')";
+                        $res1 = mysqli_query($conn,$sql1);
+
+                        $sql2 = "INSERT INTO bank_preferences (user_email, bank,account_number, account_holder)"
+                             ."VALUES ('$email','$bank','$acc_no' ,'$name')";
+                        $res2 = mysqli_query($conn,$sql2);
+
+                
+
+                         if (!$res || !$res1 || !$res2) {
+                              echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                         } else {
                     
+                            header('Location: members.php?id='.$id);
+                         }
+                     }   
 
         }
 
@@ -443,7 +463,14 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     </div>
                 </div>
                 <div class="col-md-6">
-                    
+                    <div class="form-group">
+                        <!-- <label>Organization</label> -->
+                        <input type="text" name="org" <?php 
+                                 if($row['type'] !== 'Super-Super-Admin'){
+                                     echo 'style="float: right; display:none"';
+                                }
+                                 ?> class="form-control" placeholder="Organization" value="" >
+                    </div>
                 </div>
             </div>
 
