@@ -226,7 +226,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./dashboard.php?id=<?php echo $id;?>">Users</a>
+                    <a class="navbar-brand" href="./dashboard.php?id=<?php echo $id;?>">Members</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -325,13 +325,12 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     </thead>
                                     <tbody>
                                     <!-- Display records  -->
-                                        <tr ng-repeat="user in users | filter: '<?php echo $row['org']?>' | filter:searchText">
-                                           <td>{{user.id}}</td>
-                                            <td>{{user.fullname}}</td>
-                                        	<td>{{user.type}}</td>
-                                        	<td>{{user.phone}}</td>
-                                        	<td>{{user.email}}</td>
-                                     
+                                        <tr ng-click="edit(members)" ng-repeat="members in members | filter: '<?php echo $row['org']?>' | filter:searchText">
+                                           <td>{{members.id}}</td>
+                                            <td>{{members.fullname}}</td>
+                                        	<td>{{members.type}}</td>
+                                        	<td>{{members.phone}}</td>
+                                        	<td>{{members.email}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -555,8 +554,15 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     url: 'getdata.php'
                 }).then(function successCallback(response){
                     //store response data
-                    $scope.users = response.data;
+                    $scope.members = response.data;
                 });
+
+                $scope.edit = function(members){
+                    alert(members.fullname);
+                    $scope.da = a1.fullname;
+
+                    console.log($scope.da)
+                }
           
                 $scope.Export = function (){
                     
