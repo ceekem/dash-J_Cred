@@ -560,7 +560,6 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $scope.edit = function(members){
                     alert(members.fullname);
                     $scope.da = a1.fullname;
-
                     console.log($scope.da)
                 }
           
