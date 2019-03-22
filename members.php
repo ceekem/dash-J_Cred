@@ -61,7 +61,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 <div class="sidebar" data-color="orange" data-image="assets/img/sidebar-5.jpg">
 
-<?php
+<?php 
             if(isset($_POST['save'])){
                 
                 $type = 'Member';
@@ -307,7 +307,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                 <p class="category">Members</p>
                                 
                                 <div class = "plus">
-                                    <button class="category" onclick="Modal.open('#modal02')" style="float: right;position: relative;bottom: 40px;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add Member</button>
+                                    <button class="category" onclick="Modal.open('#modal02')" style="float: right; position: relative;bottom: 40px;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add Member</button>
                                 </div>
 
 
@@ -325,18 +325,21 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     </thead>
                                     <tbody>
                                     <!-- Display records  -->
-                                        <tr ng-repeat="user in users | filter:searchText">
-                                            <td>{{user.id}}</td>
+                                        <tr ng-repeat="user in users | filter: '<?php echo $row['org']?>' | filter:searchText">
+                                           <td>{{user.id}}</td>
                                             <td>{{user.fullname}}</td>
                                         	<td>{{user.type}}</td>
                                         	<td>{{user.phone}}</td>
                                         	<td>{{user.email}}</td>
+                                     
                                         </tr>
                                     </tbody>
                                 </table>
                                 <br>
-                                    <input type="button" style="margin: 20px;" value="Export to Excel" ng-click="Export()">
+                                  <input title="you can name your file here" style="margin-left: 20px" placeholder="Name the excel file" ng-model="filename">  <input type="button" style="margin: 20px;" value="Export to Excel" ng-click="Export()">
                             </div>
+
+
                         </div>
                     </div>
 
@@ -514,6 +517,9 @@ if(!isset($_SERVER['HTTP_REFERER'])){
   </form>
 </div>
 
+
+
+
 </body>
 
     <!--   Core JS Files   -->
@@ -551,17 +557,31 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     //store response data
                     $scope.users = response.data;
                 });
-
+          
                 $scope.Export = function (){
+                    
+                    if($scope.filename == undefined){
 
-                    $scope.date = new Date();
+                        $scope.filename = "DataTable"
 
-                    $("#userTable").table2excel({
-                        filename: "DataTable("+ $scope.date +").xls"
-                    });
+                        $scope.date = new Date();
+
+                        $("#userTable").table2excel({
+                           // filename: $scope.filename + "("+ $scope.date +").xls"
+                            filename: $scope.filename + ".xls"
+                        });
+
+                    }else{
+                        $scope.date = new Date();
+
+                        $("#userTable").table2excel({
+                           // filename: $scope.filename + "("+ $scope.date +").xls"
+                            filename: $scope.filename + ".xls"
+                        });
+                    }
+                
+                   
                 }
-
-
 
             }]);
 

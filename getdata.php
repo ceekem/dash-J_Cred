@@ -11,6 +11,7 @@ while($row = mysqli_fetch_array($sel)){
                     "fullname" =>$row['fullname'], 
                     "phone" =>$row['phone'], 
                     "type" =>$row['type'],
+                    "org" => $row['org'],
                     "email" =>$row['email']);
 }
 echo json_encode($data);
