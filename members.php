@@ -359,6 +359,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     	<th>Status</th>
                                     	<th>Phone</th>
                                     	<th>Email</th>
+                                        <th>NUMBER OF DOCUMENTS</th>
                                     </thead>
                                     <tbody>
                                     <!-- Display records  -->
@@ -368,6 +369,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                         	<td>{{members.type}}</td>
                                         	<td>{{members.phone}}</td>
                                         	<td>{{members.email}}</td>
+                                            <td>{{members.docNo}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
