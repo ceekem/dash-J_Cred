@@ -61,7 +61,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 <div class="sidebar" data-color="orange" data-image="assets/img/sidebar-5.jpg">
 
-<?php
+<?php 
             if(isset($_POST['save'])){
                 
                 $type = 'Member';
@@ -263,7 +263,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./dashboard.php?id=<?php echo $id;?>">Users</a>
+                    <a class="navbar-brand" href="./dashboard.php?id=<?php echo $id;?>">Members</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -344,7 +344,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                 <p class="category">Members</p>
                                 
                                 <div class = "plus">
-                                    <button class="category" onclick="Modal.open('#modal02')" style="float: right;position: relative;bottom: 40px;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add Member</button>
+                                    <button class="category" onclick="Modal.open('#modal02')" style="float: right; position: relative;bottom: 40px;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add Member</button>
                                 </div>
 
 
@@ -362,18 +362,20 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     </thead>
                                     <tbody>
                                     <!-- Display records  -->
-                                        <tr ng-repeat="user in users | filter:searchText">
-                                            <td>{{user.id}}</td>
-                                            <td>{{user.fullname}}</td>
-                                        	<td>{{user.type}}</td>
-                                        	<td>{{user.phone}}</td>
-                                        	<td>{{user.email}}</td>
+                                        <tr ng-click="edit(members)" ng-repeat="members in members | filter: '<?php echo $row['org']?>' | filter:searchText">
+                                           <td>{{members.id}}</td>
+                                            <td>{{members.fullname}}</td>
+                                        	<td>{{members.type}}</td>
+                                        	<td>{{members.phone}}</td>
+                                        	<td>{{members.email}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <br>
-                                    <input type="button" style="margin: 20px;" value="Export to Excel" ng-click="Export()">
+                                  <input title="you can name your file here" style="margin-left: 20px" placeholder="Name the excel file" ng-model="filename">  <input type="button" style="margin: 20px;" value="Export to Excel" ng-click="Export()">
                             </div>
+
+
                         </div>
                     </div>
 
@@ -554,6 +556,9 @@ if(!isset($_SERVER['HTTP_REFERER'])){
   </form>
 </div>
 
+
+
+
 </body>
 
     <!--   Core JS Files   -->
@@ -589,19 +594,39 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     url: 'getdata.php'
                 }).then(function successCallback(response){
                     //store response data
-                    $scope.users = response.data;
+                    $scope.members = response.data;
                 });
 
-                $scope.Export = function (){
-
-                    $scope.date = new Date();
-
-                    $("#userTable").table2excel({
-                        filename: "DataTable("+ $scope.date +").xls"
-                    });
+                $scope.edit = function(members){
+                    alert(members.fullname);
+                    $scope.da = a1.fullname;
+                    console.log($scope.da)
                 }
+          
+                $scope.Export = function (){
+                    
+                    if($scope.filename == undefined){
 
+                        $scope.filename = "DataTable"
 
+                        $scope.date = new Date();
+
+                        $("#userTable").table2excel({
+                           // filename: $scope.filename + "("+ $scope.date +").xls"
+                            filename: $scope.filename + ".xls"
+                        });
+
+                    }else{
+                        $scope.date = new Date();
+
+                        $("#userTable").table2excel({
+                           // filename: $scope.filename + "("+ $scope.date +").xls"
+                            filename: $scope.filename + ".xls"
+                        });
+                    }
+                
+                   
+                }
 
             }]);
 

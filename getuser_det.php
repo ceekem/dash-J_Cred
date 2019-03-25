@@ -15,6 +15,7 @@ while($row1 = mysqli_fetch_array($sel_e)){
                         "type" =>$row1['type'],
                         "email" =>$row1['email'],
                         "type" => $row1['type'],
+                        "org" => $row1['org'],
                         "status" => $row1['status'], 
                         "employer" => $row1['employer'],
                         "gross" => $row1['gross'],

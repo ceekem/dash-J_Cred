@@ -315,8 +315,9 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                  if($row['type'] === 'Admin'){
                                      echo 'style="float: right; display:none"';
                                 }
-                                 ?> onclick="Modal.open('#modal02')" style="float: right;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add admin</button>
+                                 ?> onclick="Modal.open('#modal02')" style="float: right; position: relative;bottom: 24px;"><i class="pe-7s-plus" style="padding-right: 5px;"></i>Add admin</button>
                              
+                             <label class="sch"><span class="schlab">Search:  </span><input class="schtxt" ng-model="searchTxt"></label>
                             </div>
                             <div ng-controller="userCtrl" class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
@@ -333,19 +334,20 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     if(($row['type'] === 'Super-Admin') || ($row['type'] === 'Admin')){
                                     ?>
                                     <!-- Display records  -->
-                                        <tr ng-repeat="super in superAdmin">
+                                        <tr ng-repeat="super in superAdmin | filter: '<?php echo $row['org'] ?>' | filter:searchTxt">
                                             <td>{{super.id}}</td>
                                             <td>{{super.fullname}}</td>
                                         	<td>{{super.type}}</td>
                                         	<td>{{super.phone}}</td>
-                                        	<td>{{super.email}}</td>
+                                            <td>{{super.email}}</td>
+                                            <td>{{super.org}}</td>
                                         </tr>
 
                                         <?php
                                     }else{
                                         ?>
                                              <!-- Display records  -->
-                                        <tr ng-repeat="super in superSAdmin">
+                                        <tr ng-repeat="super in superSAdmin | filter: '<?php echo $row['org'] ?>' | filter:searchTxt">
                                             <td>{{super.id}}</td>
                                             <td>{{super.fullname}}</td>
                                         	<td>{{super.type}}</td>
