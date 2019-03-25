@@ -79,7 +79,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $rowP=mysqli_fetch_array($resultP);
 
   
-             if($email == $rowP['email']) {
+             if($email != $rowP['email']) {
                  
                 if ($row['type'] !== 'Super-Super-Admin') 
                 {
@@ -99,16 +99,38 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                           
                 }else{
                     //SQL statement to enter the items in the database
-                    $sql = "INSERT INTO users (type, fullname, email, org, phone, address, city, code)"
-                             ."VALUES ('$type', '$name','$email','$org', '$phone','$address', '$city', '$code')";
-                    $res = mysqli_query($conn,$sql);
- 
-                    if (!$res) {
-                      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                    $org_table = strtolower(str_replace(' ', '', $org));
+
+                    $sqlCreateOrg="CREATE TABLE $org_table (
+                                                            uid int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                                                            date_added datetime(6) DEFAULT CURRENT_TIMESTAMP(6),
+                                                            fullname varchar(255) NOT NULL,
+                                                            phone varchar(11) NOT NULL,
+                                                            email varchar(255) NOT NULL,
+                                                            address varchar(255) NOT NULL,
+                                                            city varchar(255) NOT NULL,
+                                                            code varchar(255) NOT NULL,
+                                                            password varchar(255) NOT NULL DEFAULT 'admin12',
+                                                            type varchar(255) NOT NULL,
+                                                            org varchar(225) NOT NULL,
+                                                            avatar varchar(100) NOT NULL,
+                                                            cover varchar(100) NOT NULL
+                                                        ) ";
+                    $res = mysqli_query($conn,$sqlCreateOrg);
+                    //Insert the first super admin 
+                    $sql = "INSERT INTO $org_table (type, fullname, email, org, phone, address, city, code)"
+                            ."VALUES ('$type', '$name','$email','$org', '$phone','$address', '$city', '$code')";
+                    $res2 = mysqli_query($conn,$sql);
+
+                    if (!$res || !$res2) {
+                        echo "Error: " . $sqlCreateOrg . "<br>" . mysqli_error($conn);
+                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                     } else {
-                     header('Location: Admin.php?id='.$id);
-                     }
+                        header('Location: Admin.php?id='.$id);
+                    }
                 }
+            }else{
+                //error message for email already exist
             }
         }
 ?>
@@ -384,10 +406,10 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 
 <div class="overlay" id="modal02" data-backdrop>
-  <button class="button" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
   <form class="modal modal2" style="width: 100%;" method="post" action="" enctype="multipart/form-data" role="form">
     <header class="modal--header">
       <h3 class="modal--title">Add Administrator</h3>
+      <button class="button" style="padding-left:101px; float:right;" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
     </header>
     <div class="modal--content">
        
@@ -512,48 +534,48 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 	
 
-				if($email == ""){
+				// if($email == ""){
 		 
 			 
-				}else {
+				// }else {
 
-                    $mail = new PHPMailer;
+                //     $mail = new PHPMailer;
 
-                    // $mail->SMTPDebug = 4;                               // Enable verbose debug output
+                //     // $mail->SMTPDebug = 4;                               // Enable verbose debug output
         
-                    $mail->isSMTP();                                      // Set mailer to use SMTP
-                    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-                    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                    $mail->Username = EMAIL;                 // SMTP username
-                    $mail->Password = PASS;                           // SMTP password
-                    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-                    $mail->Port = 587;                                    // TCP port to connect to
+                //     $mail->isSMTP();                                      // Set mailer to use SMTP
+                //     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                //     $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                //     $mail->Username = EMAIL;                 // SMTP username
+                //     $mail->Password = PASS;                           // SMTP password
+                //     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                //     $mail->Port = 587;                                    // TCP port to connect to
         
-                    $mail->setFrom(EMAIL, 'PEOSA');
-                    $mail->addAddress($_POST['email']);     // Add a recipient
-                                     // Name is optional
-                    // $mail->addReplyTo('info@example.com', 'Information');
-                    // $mail->addCC('cc@example.com');
-                    // $mail->addBCC('bcc@example.com');
+                //     $mail->setFrom(EMAIL, 'PEOSA');
+                //     $mail->addAddress($_POST['email']);     // Add a recipient
+                //                      // Name is optional
+                //     // $mail->addReplyTo('info@example.com', 'Information');
+                //     // $mail->addCC('cc@example.com');
+                //     // $mail->addBCC('bcc@example.com');
         
-                    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-                    // $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
-                    $mail->isHTML(true);                                  // Set email format to HTML
+                //     // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+                //     // $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
+                //     $mail->isHTML(true);                                  // Set email format to HTML
         
-                    $mail->Subject = "Create Password";
-                    $mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $emailP . "'>
-                                                                <p>Link</p>
-                                                         </a>";
+                //     $mail->Subject = "Create Password";
+                //     $mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $emailP . "'>
+                //                                                 <p>Link</p>
+                //                                          </a>";
                      
                 
         
-                            if(!$mail->send()) {
-                                    echo 'Message could not be sent.';
-                                    echo 'Mailer Error: ' . $mail->ErrorInfo;
-                        } else {
-                                    echo 'Message has been sent';
-                        }
-                }
+                //             if(!$mail->send()) {
+                //                     echo 'Message could not be sent.';
+                //                     echo 'Mailer Error: ' . $mail->ErrorInfo;
+                //         } else {
+                //                     echo 'Message has been sent';
+                //         }
+                // }
 
 					// 	$mail = new PHPMailer;
 

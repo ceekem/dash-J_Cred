@@ -128,6 +128,43 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                          }
                      }   
 
+
+                     $document_path = $conn->real_escape_string('L_assets/documents/'.$_FILES['document']['name']);
+
+                     if(isset($_FILES['document'])){
+                        $errors = array();
+                        // $maxsize = '10M';
+                        $maxsize = 10097252;
+                        $acceptable = array(
+                            'application/pdf',
+                            'application/msword'
+                        );
+
+                        if(($_FILES['document']['size'] >= $maxsize) || ($_FILES['document']['size'] == 0)){
+                            $errors[] = 'File too large. File must be less than 2 megabytes.';
+                        }
+
+                        if((!in_array($_FILES['document']['type'], $acceptable)) && (!empty($_FILES['document']['type']))){
+                            $errors[] = 'Invalid file type. only jpeg, jpg, gif and png are accepted';
+                        }
+
+                        if(count($errors) === 0){
+
+                            if(copy($_FILES['document']['tmp_name'], $document_path)){
+
+                                        $sql = "INSERT INTO documents (email,document) VALUES ('$email', '$document_path')";
+                                        $res = mysqli_query($conn, $sql);
+                                    }
+                        } else{
+                            foreach($errors as $error){
+                                echo '<script> alert("'.$error.'");</script>'; 
+                            }
+                           // die();
+                        }
+
+                    }
+
+
         }
 
     
@@ -508,6 +545,9 @@ if(!isset($_SERVER['HTTP_REFERER'])){
             </div>
 
     </div>
+    <div class = "formUpoad">
+       <input type="file" name="document">
+     </div>  
     <footer class="modal--footer">
       <button type="submit" name="save">Submit</button>
     </footer>

@@ -454,4 +454,9 @@
 	.trigger-btn {
 		display: inline-block;
 		margin: 100px auto;
-	}
+  }
+  
+
+  .formUpoad{
+    padding: 8px 12px;
+  };
