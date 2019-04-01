@@ -48,7 +48,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 </head>
 
-<body>
+<body ng-controller="userCtrl">
         
 
     <?php
@@ -313,7 +313,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
                                 <label class="sch"><span class="schlab">Search:  </span><input class="schtxt" ng-model="searchText"></label>
                             </div>
-                            <div ng-controller="userCtrl" class="content table-responsive table-full-width">
+                            <div class="content table-responsive table-full-width">
                               
                                 <table id="userTable" class="table table-hover table-striped">
                                     <thead>
@@ -325,12 +325,20 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     </thead>
                                     <tbody>
                                     <!-- Display records  -->
-                                        <tr ng-click="edit(members)" ng-repeat="members in members | filter: '<?php echo $row['org']?>' | filter:searchText">
-                                           <td>{{members.id}}</td>
-                                            <td>{{members.fullname}}</td>
-                                        	<td>{{members.type}}</td>
-                                        	<td>{{members.phone}}</td>
-                                        	<td>{{members.email}}</td>
+                                        <?php 
+                                            if ($row['type'] !== 'Super-Super-Admin'){
+                                        ?>
+                                            <tr ng-click="edit(member);" ng-repeat="member in members | filter: '<?php echo $row['org']?>'| filter:searchText ">
+                                            <?php }
+                                                else{
+                                            ?>
+                                                <tr ng-click="edit(member);" ng-repeat="member in members | filter:searchText ">
+                                                <?php }?>
+                                           <td>{{member.id}}</td>
+                                            <td>{{member.fullname}}</td>
+                                        	<td>{{member.type}}</td>
+                                        	<td>{{member.phone}}</td>
+                                        	<td>{{member.email}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -341,7 +349,6 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
                         </div>
                     </div>
-
 
                 </div>
             </div>
@@ -519,7 +526,148 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 
 
+
+<div class="overlay" id="modal03" data-backdrop>
+  <!-- <button class="button" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button> -->
+  <form class="modal modal2" style="width: 100%;" method="post" action="" enctype="multipart/form-data" role="form">
+    <header class="modal--header">
+      <h3 class="modal--title">View Members</h3>
+      <button class="button" style="padding-left:101px; float:right;" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    </header>
+    <div class="modal--content">
+       
+       <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <?php 
+                            //   echo '<select name="type" id="type" style="font-size: initial;"> 
+                            //              <option value="Investor">Investor</option>
+                            //              <option value="Lendee">Lendee</option>
+                            //           </select>';
+                        ?>    
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>Full Name</label> -->
+                        <input type="text" name="name" class="form-control"  placeholder="Full Name" ng-disabled="button" ng-init="button=true" ng-model="selectedmem.fullname" value="" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>ID Number</label> -->
+                        <input type="text" name="idNo" class="form-control" placeholder="ID Number" ng-disabled="button" ng-init="button=true" ng-model="selectedmem." value="" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>Phone</label> -->
+                        <input type="text" name="phone" class="form-control" placeholder="Phone" value="" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>Email</label> -->
+                        <input type="text" name="email" class="form-control" placeholder="Email" value="" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>Bank Name</label> -->
+                        <input type="text" name="bank" class="form-control" placeholder="Bank Name" value="" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>Account Number</label> -->
+                        <input type="text" name="acc_no" class="form-control" placeholder="Account Number" value="" required>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                        <!-- <label>Status</label> -->
+                        <input type="text" name="status" class="form-control" placeholder="Employement Status" value="" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label>Organization</label> -->
+                        <input type="text" name="org" <?php 
+                                 if($row['type'] !== 'Super-Super-Admin'){
+                                     echo 'style="float: right; display:none"';
+                                }
+                                 ?> class="form-control" placeholder="Organization" value="" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <!-- <label>Address</label> -->
+                        <input type="text" class="form-control" name="address" placeholder="Home Address" value="" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <!-- <label>City</label> -->
+                        <input type="text" class="form-control" name="city" placeholder="City" value="" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <!-- <label>Postal Code</label> -->
+                        <input type="number" class="form-control" name="code" placeholder="ZIP Code" value="" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                   
+                </div>
+            </div>
+
+    </div>
+    <footer class="modal--footer">
+        <div class="btns">
+            <button class="bt" ng-click="button=!button">Edit</button>
+            <button class="bt" type="submit" name="save">Save</button>
+        </div>
+    </footer>
+  </form>
+</div>
+
+
+
 </body>
+
+
 
     <!--   Core JS Files   -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script> -->
@@ -551,16 +699,29 @@ if(!isset($_SERVER['HTTP_REFERER'])){
             fetch.controller('userCtrl', ['$scope', '$http', function ($scope, $http){
                 $http({
                     method: 'get',
-                    url: 'getdata.php'
+                    // url: 'getdata.php'
+                    url: 'getuserDet.php'
                 }).then(function successCallback(response){
                     //store response data
                     $scope.members = response.data;
+                    console.log($scope.members);
                 });
 
-                $scope.edit = function(members){
-                    alert(members.fullname);
-                    $scope.da = a1.fullname;
-                    console.log($scope.da)
+                $scope.selectedmem={};
+
+                $scope.edit = function(member){
+                    Modal.open('#modal03');
+                    
+                    $scope.selectedmem.fullname = member.fullname;
+
+                  //  console.log(member.fullname);
+
+                    console.log("member: " + $scope.selectedmem.fullname);
+                    
+                    // alert(members.fullname);
+                    // $scope.da = a1.fullname;
+                    // console.log($scope.da)
+                    
                 }
           
                 $scope.Export = function (){
@@ -593,3 +754,4 @@ if(!isset($_SERVER['HTTP_REFERER'])){
         </script>
 
 </html>
+

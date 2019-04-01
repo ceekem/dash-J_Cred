@@ -44,6 +44,13 @@
     justify-content: center;
 }
 
-input[type=button]{
-    
+.btns{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.bt{
+    width: 72px;
+    margin-right: 20px;
+    display: list-item !important;
 }

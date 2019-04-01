@@ -2,7 +2,7 @@
 include 'php/db.php';
 
 
- $sel = mysqli_query($conn, "SELECT * FROM `users`,`employment_details`,`bank_preferences` WHERE users.email = employment_details.user_email AND users.email = bank_preferences.user_email");
+ $sel = mysqli_query($conn, "SELECT * FROM `users`,`employment_details`,`bank_preferences` WHERE users.email = employment_details.user_email AND users.email = bank_preferences.user_email AND type not like '%Admin'");
 //$sel = mysqli_query($conn, "select * from users");
 
 $data = array();
