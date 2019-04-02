@@ -577,8 +577,9 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <input type="text" name="idNo" class="form-control" placeholder="ID Number" ng-disabled="button" ng-init="button=true" ng-model="" value="" required>
                         <!-- <label>ID Number</label> -->
-                        <input type="text" name="idNo" class="form-control" placeholder="ID Number" ng-disabled="button" ng-init="button=true" ng-model="selectedmem." value="" required>
+                        <!-- <input type="text" name="idNo" class="form-control" placeholder="ID Number" ng-disabled="button" ng-init="button=true" ng-model="selectedmem." value="" required> -->
                     </div>
                 </div>
             </div>
@@ -586,14 +587,15 @@ if(!isset($_SERVER['HTTP_REFERER'])){
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
+                    <input type="text" name="phone" class="form-control" placeholder="Phone" ng-disabled="button" ng-init="button=true" ng-model="" value="" required>
                         <!-- <label>Phone</label> -->
-                        <input type="text" name="phone" class="form-control" placeholder="Phone" value="" required>
+                        <!-- <input type="text" name="phone" class="form-control" placeholder="Phone" ng-disabled="button" ng-init="button=true" value="" required> -->
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <!-- <label>Email</label> -->
-                        <input type="text" name="email" class="form-control" placeholder="Email" value="" required>
+                        <input type="text" name="email" class="form-control" placeholder="Email" ng-disabled="button" ng-init="button=true" value="" required>
                     </div>
                 </div>
             </div>
@@ -602,13 +604,13 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 <div class="col-md-6">
                     <div class="form-group">
                         <!-- <label>Bank Name</label> -->
-                        <input type="text" name="bank" class="form-control" placeholder="Bank Name" value="" required>
+                        <input type="text" name="bank" class="form-control" placeholder="Bank Name" ng-disabled="button" ng-init="button=true" value="" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <!-- <label>Account Number</label> -->
-                        <input type="text" name="acc_no" class="form-control" placeholder="Account Number" value="" required>
+                        <input type="text" name="acc_no" class="form-control" placeholder="Account Number" ng-disabled="button" ng-init="button=true" value="" required>
                     </div>
                 </div>
             </div>
@@ -618,7 +620,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
             <div class="col-md-6">
                 <div class="form-group">
                         <!-- <label>Status</label> -->
-                        <input type="text" name="status" class="form-control" placeholder="Employement Status" value="" required>
+                        <input type="text" name="status" class="form-control" placeholder="Employement Status" ng-disabled="button" ng-init="button=true" value="" required>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -628,7 +630,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                  if($row['type'] !== 'Super-Super-Admin'){
                                      echo 'style="float: right; display:none"';
                                 }
-                                 ?> class="form-control" placeholder="Organization" value="" >
+                                 ?> class="form-control" placeholder="Organization" ng-disabled="button" ng-init="button=true" value="" >
                     </div>
                 </div>
             </div>
@@ -637,7 +639,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 <div class="col-md-12">
                     <div class="form-group">
                         <!-- <label>Address</label> -->
-                        <input type="text" class="form-control" name="address" placeholder="Home Address" value="" required>
+                        <input type="text" class="form-control" name="address" placeholder="Home Address" ng-disabled="button" ng-init="button=true" value="" required>
                     </div>
                 </div>
             </div>
@@ -646,13 +648,13 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 <div class="col-md-4">
                     <div class="form-group">
                         <!-- <label>City</label> -->
-                        <input type="text" class="form-control" name="city" placeholder="City" value="" required>
+                        <input type="text" class="form-control" name="city" placeholder="City" ng-disabled="button" ng-init="button=true" value="" required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <!-- <label>Postal Code</label> -->
-                        <input type="number" class="form-control" name="code" placeholder="ZIP Code" value="" required>
+                        <input type="number" class="form-control" name="code" placeholder="ZIP Code" ng-disabled="button" ng-init="button=true" value="" required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -669,12 +671,12 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     </div>
     <footer class="modal--footer">
         <div class="btns">
-            <button class="bt" ng-click="button=!button">Edit</button>
+            <button class="bt" ng-click="button=!button">{{buttonText}}</button>
             <button class="bt" type="submit" name="save">Save</button>
         </div>
     </footer>
   </form>
-</div>
+</div>                          
 
 
 
@@ -719,6 +721,13 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     $scope.members = response.data;
                     console.log($scope.members);
                 });
+                
+
+                $scope.$watch('button', function(){
+                    $scope.buttonText = $scope.button ? 'Edit' : 'Close';
+                });
+                    
+                
 
                 $scope.selectedmem={};
 
@@ -726,6 +735,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     Modal.open('#modal03');
                     
                     $scope.selectedmem.fullname = member.fullname;
+                    $scoope.seletedmem.idNo = member.
 
                   //  console.log(member.fullname);
 
