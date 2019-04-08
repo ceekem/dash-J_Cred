@@ -2,7 +2,7 @@
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'jcred';
+$dbname = 'peo_test';
 
 // $servername = 'localhost:3306';
 // $username = 'binarjlg_peosa';
