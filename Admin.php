@@ -72,6 +72,53 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 $city = $conn->real_escape_string($_POST['city']);
                 $code = $conn->real_escape_string($_POST['code']);
                 $org = $conn->real_escape_string($_POST['org']);
+                $logo_path = $conn->real_escape_string('L_assets/images/logo/'.$_FILES['logo']['name']);
+                $logo_name = $conn->real_escape_string($_FILES['logo']['name']);
+
+// ================logo upload ================
+
+if(isset($_FILES['logo'])){
+    $errors = array();
+    // $maxsize = '10M';
+    $maxsize = 10097252;
+    $acceptable = array(
+        'image/jpeg',
+        'image/jpg',
+        'image/gif',
+        'image/png'
+    );
+
+    if(($_FILES['logo']['size'] >= $maxsize) || ($_FILES['logo']['size'] == 0)){
+        $errors[] = 'File too large. File must be less than 10 megabytes.';
+    }
+
+    if((!in_array($_FILES['logo']['type'], $acceptable)) && (!empty($_FILES['logo']['type']))){
+        $errors[] = 'Invalid file type. only jpeg, jpg, gif and png are accepted';
+    }
+
+    if(count($errors) === 0){
+
+        if(copy($_FILES['logo']['tmp_name'], $logo_path)){
+
+                    echo "<script>console.log('logo copied')</script>";
+
+                    echo "<script>console.log('".$logo_path."')</script>";
+
+                    echo "<script>console.log('".$logo_name."')</script>";
+                    // $sql = "UPDATE users SET logo = '$logo_path' WHERE email = '$org'";
+                    // $res = mysqli_query($conn, $sql);
+                }
+    } else{
+        foreach($errors as $error){
+            echo '<script> alert("'.$error.'");</script>'; 
+        }
+        // die();
+    }
+
+}
+
+
+//================logo upload end ===============
 
 
                 $sqlP="SELECT * FROM users WHERE email='$email'";
@@ -86,8 +133,8 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     
                         //SQL statement to enter the items in the database
                         $org2 = $row['org'];
-                        $sql = "INSERT INTO users (type, fullname, email, org, phone, address, city, code)"
-                             ."VALUES ('$type', '$name','$email','$org2', '$phone','$address', '$city', '$code')";
+                        $sql = "INSERT INTO users (type, fullname, email, org, logo, phone, address, city, code)"
+                             ."VALUES ('$type', '$name','$email','$org2','$logo_path' ,'$phone','$address', '$city', '$code')";
                         $res = mysqli_query($conn,$sql);
  
                         if (!$res) {
@@ -99,8 +146,8 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                           
                 }else{
                     //SQL statement to enter the items in the database
-                    $sql = "INSERT INTO users (type, fullname, email, org, phone, address, city, code)"
-                             ."VALUES ('$type', '$name','$email','$org', '$phone','$address', '$city', '$code')";
+                    $sql = "INSERT INTO users (type, fullname, email, org, logo, phone, address, city, code)"
+                             ."VALUES ('$type', '$name','$email','$org','$logo_path','$phone','$address', '$city', '$code')";
                     $res = mysqli_query($conn,$sql);
  
                     if (!$res) {
@@ -400,10 +447,11 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
 
 <div class="overlay" id="modal02" data-backdrop>
-  <button class="button" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+  <!-- <button class="button" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button> -->
   <form class="modal modal2" style="width: 100%;" method="post" action="" enctype="multipart/form-data" role="form">
     <header class="modal--header">
       <h3 class="modal--title">Add Administrator</h3>
+      <button class="button" style="padding-left:101px; float:right;" data-type="icon" onclick="Modal.close(event)" data-modal-close><svg class="icon icon-clear" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
     </header>
     <div class="modal--content">
        
@@ -453,7 +501,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 <div class="col-md-6">
                     <div class="form-group">
                         <!-- <label>Phone/label> -->
-                        <input type="text" class="form-control" name="phone" placeholder="Phone" value="" required>
+                        <input type="text" class="form-control" name="phone" id="org" placeholder="Phone" value="" required>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -463,7 +511,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                  if($row['type'] != 'Super-Super-Admin'){
                                      echo 'style="float: right; display:none"';
                                 }
-                                 ?> class="form-control" placeholder="Organization">
+                                 ?> class="form-control" id="org" placeholder="Organization">
                                 
                     </div>
                 </div>
@@ -507,156 +555,162 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 
             <div class="row">
                 <div class="col-md-12">
-                   
+                     <!-- <input type="file" class="form-control" name="cover" id="cover" accept="image/*"> -->
+               
                 </div>
             </div>
 
     </div>
+    
+   
+
     <footer class="modal--footer">
+    <input style="display: none; visibility: hidden;" id="myFileInput" name="logo" type="file">
+     <button type="button" id="logo-btn" onclick="$('#myFileInput').trigger('click');">Select Logo</button>
       <button type="submit" name="save">Submit</button>
     </footer>
   </form>
 </div>
 
 <?php
- if(isset($_POST['save']) ){
+//  if(isset($_POST['save']) ){
                 
-	// $emailP=$_POST['emailP'];
+// 	$emailP=$_POST['email'];
 	
 
-//	is_numeric($item['quantity'])
+// //	is_numeric($item['quantity'])
 
 	
 
-				if($email == ""){
+// 				if($email == ""){
 		 
 			 
-				}else {
+// 				}else {
 
-                    $mail = new PHPMailer;
+//                     $mail = new PHPMailer;
 
-                    // $mail->SMTPDebug = 4;                               // Enable verbose debug output
+//                     // $mail->SMTPDebug = 4;                               // Enable verbose debug output
         
-                    $mail->isSMTP();                                      // Set mailer to use SMTP
-                    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-                    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                    $mail->Username = EMAIL;                 // SMTP username
-                    $mail->Password = PASS;                           // SMTP password
-                    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-                    $mail->Port = 587;                                    // TCP port to connect to
+//                     $mail->isSMTP();                                      // Set mailer to use SMTP
+//                     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+//                     $mail->SMTPAuth = true;                               // Enable SMTP authentication
+//                     $mail->Username = EMAIL;                 // SMTP username
+//                     $mail->Password = PASS;                           // SMTP password
+//                     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+//                     $mail->Port = 587;                                    // TCP port to connect to
         
-                    $mail->setFrom(EMAIL, 'PEOSA');
-                    $mail->addAddress($_POST['email']);     // Add a recipient
-                                     // Name is optional
-                    // $mail->addReplyTo('info@example.com', 'Information');
-                    // $mail->addCC('cc@example.com');
-                    // $mail->addBCC('bcc@example.com');
+//                     $mail->setFrom(EMAIL, 'PEOSA');
+//                     $mail->addAddress($_POST['email']);     // Add a recipient
+//                                      // Name is optional
+//                     // $mail->addReplyTo('info@example.com', 'Information');
+//                     // $mail->addCC('cc@example.com');
+//                     // $mail->addBCC('bcc@example.com');
         
-                    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-                    // $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
-                    $mail->isHTML(true);                                  // Set email format to HTML
+//                     // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+//                     // $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
+//                     $mail->isHTML(true);                                  // Set email format to HTML
         
-                    $mail->Subject = "Create Password";
-                    $mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $emailP . "'>
-                                                                <p>Link</p>
-                                                         </a>";
+//                     $mail->Subject = "Create Password";
+//                     $mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $emailP . "'>
+//                                                                 <p>Link</p>
+//                                                          </a>";
                      
                 
         
-                            if(!$mail->send()) {
-                                    echo 'Message could not be sent.';
-                                    echo 'Mailer Error: ' . $mail->ErrorInfo;
-                        } else {
-                                    echo 'Message has been sent';
-                        }
-                }
+//                             if(!$mail->send()) {
+//                                     echo 'Message could not be sent.';
+//                                     echo 'Mailer Error: ' . $mail->ErrorInfo;
+//                         } else {
+//                                     echo 'Message has been sent';
+//                         }
+//                 }
 
-					// 	$mail = new PHPMailer;
+// 						$mail = new PHPMailer;
 
-					// 	// $mail->SMTPDebug = 4;                               // Enable verbose debug output
+// 						// $mail->SMTPDebug = 4;                               // Enable verbose debug output
 			
-					// 	$mail->isSMTP();                                      // Set mailer to use SMTP
-					// 	$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-					// 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-					// 	$mail->Username = EMAIL;                 // SMTP username
-					// 	$mail->Password = PASS;                           // SMTP password
-					// 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-					// 	$mail->Port = 587;                                    // TCP port to connect to
+// 						$mail->isSMTP();                                      // Set mailer to use SMTP
+// 						$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+// 						$mail->SMTPAuth = true;                               // Enable SMTP authentication
+// 						$mail->Username = EMAIL;                 // SMTP username
+// 						$mail->Password = PASS;                           // SMTP password
+// 						$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+// 						$mail->Port = 587;                                    // TCP port to connect to
 			
-					// 	$mail->setFrom(EMAIL, 'Peosa');
-					// 	$mail->addAddress($_POST['email']);     // Add a recipient
-					// 					 // Name is optional
-					// 	// $mail->addReplyTo('info@example.com', 'Information');
-					// 	// $mail->addCC('cc@example.com');
-					// 	// $mail->addBCC('bcc@example.com');
+// 						$mail->setFrom(EMAIL, 'Peosa');
+// 						$mail->addAddress($_POST['email']);     // Add a recipient
+// 										 // Name is optional
+// 						// $mail->addReplyTo('info@example.com', 'Information');
+// 						// $mail->addCC('cc@example.com');
+// 						// $mail->addBCC('bcc@example.com');
 			
-					// 	// $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-					// 	// $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
-					// 	$mail->isHTML(true);                                  // Set email format to HTML
+// 						// $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+// 						// $mail->addAttachment('/tmp/imag e.jpg', 'new.jpg');    // Optional name
+// 						$mail->isHTML(true);                                  // Set email format to HTML
 			
-					// 	$mail->Subject = "Password Recovery";
-					// 	$mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $email . "'>
-					// 												<p>Link</p>
-					// 										 </a>";
+// 						$mail->Subject = "Password Recovery";
+// 						$mail->Body    = "<a href='localhost/main/dash-J_Cred/recoverypwd.php?id=" . $email . "'>
+// 																	<p>Link</p>
+// 															 </a>";
 						 
 					
 			
-					// 			if(!$mail->send()) {
-					// 					echo '<script type="text/javascript">
-                    //                     $(document).ready(function(){
+// 								if(!$mail->send()) {
+// 										echo '<script type="text/javascript">
+//                                         $(document).ready(function(){
                                 
-                    //                         demo.initChartist();
+//                                             demo.initChartist();
                                 
-                    //                         $.notify({
-                    //                             icon: "pe-7s-gift",
-                    //                             message: "email to new created admin could not be sent</b>."
+//                                             $.notify({
+//                                                 icon: "pe-7s-gift",
+//                                                 message: "email to new created admin could not be sent</b>."
                                 
-                    //                         },{
-                    //                             type: "info",
-                    //                             timer: 4000
-                    //                         });
+//                                             },{
+//                                                 type: "info",
+//                                                 timer: 4000
+//                                             });
                                 
-                    //                     });
-                    //                 </script>.';
-					// 					echo '<script type="text/javascript">
-                    //                     $(document).ready(function(){
+//                                         });
+//                                     </script>.';
+// 										echo '<script type="text/javascript">
+//                                         $(document).ready(function(){
                                 
-                    //                         demo.initChartist();
+//                                             demo.initChartist();
                                 
-                    //                         $.notify({
-                    //                             icon: "pe-7s-gift",
-                    //                             message: "Error :- '. $mail->ErrorInfo .'</b>."
+//                                             $.notify({
+//                                                 icon: "pe-7s-gift",
+//                                                 message: "Error :- '. $mail->ErrorInfo .'</b>."
                                 
-                    //                         },{
-                    //                             type: "info",
-                    //                             timer: 4000
-                    //                         });
+//                                             },{
+//                                                 type: "info",
+//                                                 timer: 4000
+//                                             });
                                 
-                    //                     });
-                    //                 </script> ' ;
+//                                         });
+//                                     </script> ' ;
 
                                         
 										
-					// 		}else{
-                    //             echo '<script type="text/javascript">
-                    //                     $(document).ready(function(){
+// 							}else{
+//                                 echo '<script type="text/javascript">
+//                                         $(document).ready(function(){
                                 
-                    //                         demo.initChartist();
+//                                             demo.initChartist();
                                 
-                    //                         $.notify({
-                    //                             icon: "pe-7s-gift",
-                    //                             message: "Administrator created</b>."
+//                                             $.notify({
+//                                                 icon: "pe-7s-gift",
+//                                                 message: "Administrator created</b>."
                                 
-                    //                         },{
-                    //                             type: "info",
-                    //                             timer: 4000
-                    //                         });
+//                                             },{
+//                                                 type: "info",
+//                                                 timer: 4000
+//                                             });
                                 
-                    //                     });
-                    //                 </script>';
-                    //         }
-					// }
-    }
+//                                         });
+//                                     </script>';
+//                             }
+// 					}
+
 		
 ?>
 
@@ -686,7 +740,21 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     <script src="assets/js/fpwdmodal.js"></script>
 
     <script>
-    
+    $(document).ready(function() {
+    $('#org').keyUp(function(){
+                if($(this).val() != ''){
+                    $('#logo-btn').prop('disabled', false)
+                }
+                    //else{
+                //     $('#logo-btn').prop('disabled', true)
+                // }
+            });
+
+        });
+
+    </script>
+
+    <script>
              var fetch = angular.module('myapp', []);
 
             fetch.controller('userCtrl', ['$scope', '$http', function ($scope, $http){

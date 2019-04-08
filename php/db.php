@@ -23,8 +23,8 @@ $conn = new mysqli($servername,$username,$password,$dbname);
         //     echo "Connection successfull";
             
 		// }
-define('EMAIL','vhuyositsula@gmail.com');
-define('PASS', 'sitsulav');
+define('EMAIL','doe.mortu@gmail.com');
+define('PASS', 'dnomyardoe');
 
 
 
