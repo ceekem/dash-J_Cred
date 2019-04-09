@@ -395,7 +395,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     }else{
                                         ?>
                                              <!-- Display records  -->
-                                        <tr ng-repeat="super in superSAdmin | filter: '<?php echo $row['org'] ?>' | filter:searchTxt">
+                                        <tr ng-repeat="super in superSAdmin | filter:searchTxt">
                                             <td>{{super.id}}</td>
                                             <td>{{super.fullname}}</td>
                                         	<td>{{super.type}}</td>
@@ -468,7 +468,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                     <div class="form-group">
                     <?php 
                                  if($row['type'] === 'Super-Super-Admin'){
-                                    echo '<select name="type" id="type" style="font-size: initial;"> 
+                                    echo '<select name="type" id="type" onchange="showOrg(this)" style="font-size: initial;"> 
                                             <option value="Admin">Admin</option>
                                             <option value="Super-Admin">Super-Admin</option>
                                             <option value="Super-Super-Admin">Super-Super-Admin</option>
@@ -519,7 +519,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                  if($row['type'] != 'Super-Super-Admin'){
                                      echo 'style="float: right; display:none"';
                                 }
-                                 ?> class="form-control" placeholder="Organization">
+                                 ?> class="form-control" id="orgDisplay" placeholder="Organization">
                                 
                     </div>
                 </div>
@@ -660,6 +660,15 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
     <script src="assets/js/fpwdmodal.js"></script>
+
+    <script>
+        function showOrg(select){
+            if(select.value == 'Super-Super-Admin'){
+                document.getElementById('orgDisplay').style.display = "none";
+            }
+        };
+    </script>
+
 
     <script>
     
