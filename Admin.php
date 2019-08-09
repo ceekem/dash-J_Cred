@@ -382,7 +382,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                     if(($row['type'] === 'Super-Admin') || ($row['type'] === 'Admin')){
                                     ?>
                                     <!-- Display records  -->
-                                        <tr ng-repeat="super in superAdmin | filter: '<?php echo $row['org'] ?>' | filter:searchTxt">
+                                        <tr ng-repeat="super in Admin | filter: '<?php echo $row['org'] ?>' | filter:searchTxt">
                                             <td>{{super.id}}</td>
                                             <td>{{super.fullname}}</td>
                                         	<td>{{super.type}}</td>
@@ -519,7 +519,7 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                                  if($row['type'] != 'Super-Super-Admin'){
                                      echo 'style="float: right; display:none"';
                                 }
-                                 ?> class="form-control" id="orgDisplay" placeholder="Organization">
+                                 ?> class="form-control" id="orgDisplay" placeholder="Organization" required>
                                 
                     </div>
                 </div>
@@ -665,16 +665,20 @@ if(!isset($_SERVER['HTTP_REFERER'])){
         function showOrg(select){
             if(select.value == 'Super-Super-Admin'){
                 document.getElementById('orgDisplay').style.display = "none";
+            } else{
+                document.getElementById('orgDisplay').style.display = "block";
             }
+
         };
     </script>
+
 
 
     <script>
     
              var fetch = angular.module('myapp', []);
 
-            fetch.controller('userCtrl', ['$scope', '$http', function ($scope, $http){
+            fetch.controller('userCtrl', ['$scope', '$http', function ($scope, $http, $filter){
              
                 $http({
                     method: 'get',
@@ -682,7 +686,9 @@ if(!isset($_SERVER['HTTP_REFERER'])){
                 }).then(function successCallback(response){
                     //store response data
                     $scope.superAdmin = response.data;
+                  
                 });
+
 
 
                 $http({
